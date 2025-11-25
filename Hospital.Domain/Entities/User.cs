@@ -9,5 +9,11 @@
         public required string LastName { get; set; }
         public int RoleId { get; set; } 
         public Role? Role { get; set; } 
+        public enum Gender
+        {
+            Male,
+            Female
+        }
+
     }
 }
