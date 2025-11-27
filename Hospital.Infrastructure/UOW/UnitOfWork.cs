@@ -1,5 +1,7 @@
-﻿using Hospital.Domain.Interfaces;
+﻿using Hospital.Domain.Entities;
+using Hospital.Domain.Interfaces;
 using Hospital.Infrastructure.Data;
+using Hospital.Infrastructure.Repositories;
 using System.Threading.Tasks;
 
 namespace Hospital.Infrastructure.UOW
@@ -8,20 +10,38 @@ namespace Hospital.Infrastructure.UOW
     {
         private readonly ApplicationDbContext _context;
 
+        // Backing fields (Lazy loading için gizli alanlar)
+        private IUserRepository? _users;
+        private IGenericRepository<Role>? _roles;
+        private IGenericRepository<Doctor>? _doctors;
+        private IGenericRepository<Specialty>? _specialties;
+        private IGenericRepository<Appointment>? _appointments;
+        private IGenericRepository<PatientComplaint>? _patientComplaints;
+
         public UnitOfWork(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<int> SaveChangesAsync()
+        // Public properties (İstendiğinde oluşturulur - Lazy Loading)
+        // DİKKAT: Users için özel repository kullanıyoruz.
+        public IUserRepository Users => _users ??= new UserRepository(_context);
+        public IGenericRepository<Role> Roles => _roles ??= new GenericRepository<Role>(_context);
+        public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
+        public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
+        public IGenericRepository<Appointment> Appointments => _appointments ??= new GenericRepository<Appointment>(_context);
+        public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
+
+        // Değişiklikleri veritabanına kaydet
+        public async Task<int> CompleteAsync()
         {
             return await _context.SaveChangesAsync();
         }
 
+        // Bellek temizliği
         public void Dispose()
         {
             _context.Dispose();
-            GC.SuppressFinalize(this);
         }
     }
 }

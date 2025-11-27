@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Veritaban� Servisi
+  postgresdb:
+    image: postgres:16 # 16 olarak kalabilir, sorun de�il
+    container_name: hospital_postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: hospitaldb
+    ports:
+      - "5433:5432" # <-- DE����KL�K BURADA: D�� portu 5433 yapt�k
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  # RabbitMQ Mesaj Kuyruk Servisi
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: hospital_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    restart: unless-stopped
+
+volumes:
+  postgres_data:

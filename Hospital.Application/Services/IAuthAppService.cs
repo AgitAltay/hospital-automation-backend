@@ -5,7 +5,10 @@ namespace Hospital.Application.Services
 {
     public interface IAuthAppService
     {
-        Task<AuthResponseDto?> Register(RegisterDto registerDto);
-        Task<AuthResponseDto?> Login(LoginDto loginDto);
+        // Kayıt olma metodu imzası
+        Task<AuthResponseDto> RegisterAsync(RegisterDto registerDto);
+
+        // Giriş yapma metodu imzası
+        Task<AuthResponseDto> LoginAsync(LoginDto loginDto);
     }
 }

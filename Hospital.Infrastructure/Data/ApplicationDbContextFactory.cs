@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System;
 using System.IO;
-using System.Reflection; // Assembly için gerekli
 
 namespace Hospital.Infrastructure.Data
 {
@@ -10,58 +10,52 @@ namespace Hospital.Infrastructure.Data
     {
         public ApplicationDbContext CreateDbContext(string[] args)
         {
-            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+            // 1. Çalışma dizinini al (Örn: C:\Proje\HospitalAutomation)
+            var currentDirectory = Directory.GetCurrentDirectory();
 
-            // Bu, ApplicationDbContextFactory'nin bulunduğu assembly'nin yolunu verir (Infrastructure projesinin bin klasörü).
-            var assemblyLocation = Assembly.GetExecutingAssembly().Location;
-            var currentAssemblyDirectory = Path.GetDirectoryName(assemblyLocation);
+            // 2. API projesinin yolunu bulmaya çalış.
+            // İlk olarak, mevcut dizinin içinde "Hospital.API" klasörü var mı diye bak.
+            var apiProjectPath = Path.Combine(currentDirectory, "Hospital.API");
 
-            // Çözüm kök dizinini bulmak için, Infrastructure projesinin çıktısından geriye doğru gidelim.
-            // Varsayım: "Infrastructure/bin/Debug/netX.0" -> "Infrastructure" -> "Solution Root"
-            // Bu 2 seviye yukarı çıkmaktır.
-            var solutionRoot = Path.Combine(currentAssemblyDirectory!, "..", "..", "..");
-
-            // Hospital.API projesinin çıktı dizinini oluşturalım.
-            // Örneğin: HospitalAutomation/Hospital.API/bin/Debug/net8.0
-            var targetFramework = System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription
-                                        .Replace(".NET ", "net").Split(" ")[0].ToLower(); // örn: net8.0
-
-            string baseAppPath = Path.Combine(solutionRoot, "Hospital.API", "bin", environmentName, targetFramework);
-
-            // DEBUG İÇİN KONSOLA YAZDIRMA (sorun olursa kontrol etmek için açabiliriz)
-            // Console.WriteLine($"DEBUG: AppContext.BaseDirectory: {AppContext.BaseDirectory}");
-            // Console.WriteLine($"DEBUG: Assembly Location: {assemblyLocation}");
-            // Console.WriteLine($"DEBUG: Current Assembly Directory: {currentAssemblyDirectory}");
-            // Console.WriteLine($"DEBUG: Solution Root: {solutionRoot}");
-            // Console.WriteLine($"DEBUG: Computed API Output Path: {baseAppPath}");
-            // Console.WriteLine($"DEBUG: Environment Name: {environmentName}");
-            // Console.WriteLine($"DEBUG: Target Framework: {targetFramework}");
-
-
-            if (!Directory.Exists(baseAppPath))
+            // Eğer mevcut dizinde yoksa (belki komut bir alt klasörden çalıştırılmıştır),
+            // bir üst dizine çıkıp orada ara.
+            if (!Directory.Exists(apiProjectPath))
             {
-                throw new InvalidOperationException($"Hospital.API projesinin çıktı dizini bulunamadı: {baseAppPath}. " +
-                                                    "Lütfen yolun doğru olduğundan ve projenin derlenmiş olduğundan emin olun. " +
-                                                    $"Current Working Directory: {Directory.GetCurrentDirectory()}");
+                var parentDir = Directory.GetParent(currentDirectory)?.FullName;
+                if (parentDir != null)
+                {
+                    apiProjectPath = Path.Combine(parentDir, "Hospital.API");
+                }
             }
 
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(baseAppPath) // API projesinin çıktı dizinini kullan!
-                .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: true)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true) // Fallback olarak her zaman appsettings.json'ı oku
+            // 3. Güvenlik kontrolü: API klasörü bulundu mu?
+            if (!Directory.Exists(apiProjectPath) || !File.Exists(Path.Combine(apiProjectPath, "appsettings.json")))
+            {
+                throw new DirectoryNotFoundException(
+                    $"API projesi veya 'appsettings.json' dosyası bulunamadı!\n" +
+                    $"Aranan yol: '{apiProjectPath}'\n" +
+                    "Lütfen 'dotnet ef' komutunu ana çözüm klasöründen (HospitalAutomation.sln dosyasının olduğu yer) çalıştırdığınızdan emin olun.");
+            }
+
+            Console.WriteLine($"[Factory Info] Konfigürasyon dosyaları '{apiProjectPath}' klasöründen okunuyor...");
+
+            // 4. Konfigürasyonu inşa et
+            var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(apiProjectPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{environmentName}.json", optional: true)
                 .Build();
 
-            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            // 5. Bağlantı dizesini al ve DbContext'i oluştur
             var connectionString = configuration.GetConnectionString("DefaultConnection");
-
             if (string.IsNullOrEmpty(connectionString))
             {
-                throw new InvalidOperationException($"DefaultConnection connection string is not configured. " +
-                                                    $"Please ensure 'ConnectionStrings:DefaultConnection' is defined in 'appsettings.json' " +
-                                                    $"located in the Hospital.API project's output directory: {baseAppPath}.");
+                throw new InvalidOperationException($"'DefaultConnection' bağlantı dizesi appsettings.json dosyasında bulunamadı.");
             }
 
-            builder.UseNpgsql(connectionString);
+            var builder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            builder.UseNpgsql(connectionString, b => b.MigrationsAssembly("Hospital.Infrastructure"));
 
             return new ApplicationDbContext(builder.Options);
         }

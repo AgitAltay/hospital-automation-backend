@@ -6,23 +6,20 @@ namespace Hospital.Application.DTOs
     {
         [Required]
         [EmailAddress]
-        public required string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [MinLength(6)]
-        public required string Password { get; set; }
+        public string Password { get; set; } = string.Empty;
 
         [Required]
-        [Compare("Password")] 
-        public required string ConfirmPassword { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
         [Required]
-        public required string FirstName { get; set; }
+        public string LastName { get; set; } = string.Empty;
 
+        // Hatanın sebebi bu özelliğin eksik olmasıydı.
         [Required]
-        public required string LastName { get; set; }
-
-        [Required]
-        public required string Role { get; set; }
+        public int RoleId { get; set; }
     }
 }
