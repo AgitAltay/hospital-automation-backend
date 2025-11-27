@@ -1,8 +1,8 @@
 ﻿using Hospital.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using System; // DateTime için
-using System.Threading; // CancellationToken için
-using System.Threading.Tasks; // SaveChangesAsync için
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Hospital.Infrastructure.Data
 {
@@ -65,19 +65,26 @@ namespace Hospital.Infrastructure.Data
                 .HasForeignKey(pc => pc.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Doctor'ın User'dan türetildiğini ve ayrı bir tabloya sahip olduğunu belirtme
+            // Doctor'ın User'dan türetildiğini ve ayrı bir tabloya sahip olduğunu belirtme (TPT)
             modelBuilder.Entity<Doctor>()
                 .ToTable("Doctors");
 
+            // --- GLOBAL QUERY FILTERS (DÜZELTİLMİŞ KISIM) ---
 
+            // 1. User filtresi (Kök entity): Bu filtre Doctor ve Patient'ı da otomatik kapsar.
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
+
+            // 2. Diğer bağımsız entity'ler için filtreler:
             modelBuilder.Entity<Role>().HasQueryFilter(r => !r.IsDeleted);
-            modelBuilder.Entity<Doctor>().HasQueryFilter(d => !d.IsDeleted);
-            modelBuilder.Entity<Specialty>().HasQueryFilter(s => !s.IsDeleted); 
+            modelBuilder.Entity<Specialty>().HasQueryFilter(s => !s.IsDeleted);
             modelBuilder.Entity<Appointment>().HasQueryFilter(a => !a.IsDeleted);
             modelBuilder.Entity<PatientComplaint>().HasQueryFilter(pc => !pc.IsDeleted);
+
+            // DİKKAT: Doctor için olan satırı SİLDİK.
+            // modelBuilder.Entity<Doctor>().HasQueryFilter(d => !d.IsDeleted); <-- BU SATIR HATAYA SEBEP OLUYORDU
         }
 
+        // SaveChanges metotlarını override ederek CreatedDate ve UpdatedDate'i otomatik güncelleyelim
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
@@ -90,10 +97,10 @@ namespace Hospital.Infrastructure.Data
                     case EntityState.Modified:
                         entry.Entity.UpdatedDate = DateTime.UtcNow;
                         break;
-                    case EntityState.Deleted: // Eğer soft delete istiyorsak, silme durumunu yakalayalım
-                        entry.State = EntityState.Modified; // Durumu Modified yap
-                        entry.Entity.IsDeleted = true; // IsDeleted'ı true yap
-                        entry.Entity.UpdatedDate = DateTime.UtcNow; // Güncelleme tarihini de set et
+                    case EntityState.Deleted: // Soft delete
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDeleted = true;
+                        entry.Entity.UpdatedDate = DateTime.UtcNow;
                         break;
                 }
             }

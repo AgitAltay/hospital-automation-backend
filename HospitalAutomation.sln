@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Application", "Hos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Infrastructure", "Hospital.Infrastructure\Hospital.Infrastructure.csproj", "{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.API", "Hospital.API\Hospital.API.csproj", "{E698F773-1A2C-4246-BB11-1A823494BFF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,18 @@ Global
 		{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x64.Build.0 = Release|Any CPU
 		{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x86.ActiveCfg = Release|Any CPU
 		{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x86.Build.0 = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x64.Build.0 = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x86.Build.0 = Debug|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x64.ActiveCfg = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x64.Build.0 = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x86.ActiveCfg = Release|Any CPU
+		{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,109 +1,107 @@
 ﻿using Hospital.Application.DTOs;
-using Hospital.Application.Services;
 using Hospital.Domain.Entities;
 using Hospital.Domain.Interfaces;
+using System;
 using System.Threading.Tasks;
-using System.Linq; 
 
 namespace Hospital.Application.Services.Implementations
 {
     public class AuthAppService : IAuthAppService
     {
-        private readonly IGenericRepository<User> _userRepository;
-        private readonly IGenericRepository<Role> _roleRepository;
-        private readonly IAuthService _authService;
+        // Domain katmanındaki UnitOfWork ve AuthService'i kullanacağız.
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IAuthService _authService;
 
-        public AuthAppService(
-            IGenericRepository<User> userRepository,
-            IGenericRepository<Role> roleRepository,
-            IAuthService authService,
-            IUnitOfWork unitOfWork)
+        // Constructor Injection ile bağımlılıkları alıyoruz.
+        public AuthAppService(IUnitOfWork unitOfWork, IAuthService authService)
         {
-            _userRepository = userRepository;
-            _roleRepository = roleRepository;
-            _authService = authService;
             _unitOfWork = unitOfWork;
+            _authService = authService;
         }
 
-        public async Task<AuthResponseDto?> Register(RegisterDto registerDto)
+        // --- KAYIT OLMA METODU ---
+        public async Task<AuthResponseDto> RegisterAsync(RegisterDto registerDto)
         {
-            if (await _userRepository.FindAsync(u => u.Email == registerDto.Email) is not null && (await _userRepository.FindAsync(u => u.Email == registerDto.Email)).Any())
+            // 1. İş Kuralı: Bu e-posta adresiyle kayıtlı bir kullanıcı var mı?
+            // User repository'sini UnitOfWork üzerinden çağırıyoruz.
+            var existingUser = await _unitOfWork.Users.GetByEmailAsync(registerDto.Email);
+            if (existingUser != null)
             {
-                return null; 
+                return new AuthResponseDto { Success = false, Message = "Bu e-posta adresi zaten kullanılıyor." };
             }
 
+            // 2. Şifreleme: Şifreyi hashle ve saltla.
+            // Domain'deki AuthService bu işi yapar.
             _authService.CreatePasswordHash(registerDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
-            var role = (await _roleRepository.FindAsync(r => r.Name == registerDto.Role)).FirstOrDefault();
+            // 3. Rol Kontrolü: Belirtilen rol var mı?
+            var role = await _unitOfWork.Roles.GetByIdAsync(registerDto.RoleId);
             if (role == null)
             {
-             
-                return null;
+                return new AuthResponseDto { Success = false, Message = "Geçersiz rol ID'si." };
             }
 
+            // 4. Yeni User entity'sini oluştur.
             var user = new User
             {
                 Email = registerDto.Email,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
+                RoleId = registerDto.RoleId,
+                PhoneNumber = registerDto.PhoneNumber,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                RoleId = role.Id,
-                Role = role 
+                CreatedDate = DateTime.UtcNow,
+                IsDeleted = false
             };
 
-            await _userRepository.AddAsync(user);
-            await _unitOfWork.SaveChangesAsync(); 
+            // 5. Veritabanına kaydet.
+            await _unitOfWork.Users.AddAsync(user);
+            await _unitOfWork.CompleteAsync(); // Değişiklikleri veritabanına yansıt.
 
-            var token = _authService.CreateToken(user);
-
+            // 6. Başarılı dönüş yap (DTO'ya dönüştür).
             return new AuthResponseDto
             {
-                Token = token,
-                User = new UserDto
+                Success = true,
+                Data = new UserDto
                 {
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
-                    RoleName = role.Name
+                    RoleName = role.Name // Rol adını da ekliyoruz.
                 }
             };
         }
 
-        public async Task<AuthResponseDto?> Login(LoginDto loginDto)
+        // --- GİRİŞ YAPMA METODU ---
+        public async Task<AuthResponseDto> LoginAsync(LoginDto loginDto)
         {
-            var user = (await _userRepository.FindAsync(u => u.Email == loginDto.Email)).FirstOrDefault();
+            // 1. Kullanıcıyı bul.
+            // User repository'sini UnitOfWork üzerinden çağırıyoruz.
+            // Rolü de dahil ederek (Include) getiriyoruz ki token içine rol bilgisini koyabilelim.
+            var user = await _unitOfWork.Users.GetByEmailWithRoleAsync(loginDto.Email);
+
             if (user == null)
             {
-                return null; 
+                return new AuthResponseDto { Success = false, Message = "Kullanıcı bulunamadı." };
             }
 
-            
-            if (user.Role == null)
-            {
-                user.Role = await _roleRepository.GetByIdAsync(user.RoleId);
-            }
-
+            // 2. Şifre Kontrolü: Girilen şifre hash'i, veritabanındakiyle eşleşiyor mu?
             if (!_authService.VerifyPasswordHash(loginDto.Password, user.PasswordHash, user.PasswordSalt))
             {
-                return null; 
+                return new AuthResponseDto { Success = false, Message = "Hatalı şifre." };
             }
 
+            // 3. JWT Token Üretimi.
+            // Domain'deki AuthService bu işi yapar.
             var token = _authService.CreateToken(user);
 
+            // 4. Başarılı dönüş yap (Token'ı string olarak döndür).
             return new AuthResponseDto
             {
-                Token = token,
-                User = new UserDto
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    RoleName = user.Role?.Name ?? "Unknown"
-                }
+                Success = true,
+                Data = token
             };
         }
     }
