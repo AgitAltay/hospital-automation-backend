@@ -1,4 +1,5 @@
 ﻿using System;
+using Hospital.Domain.Enums;
 
 namespace Hospital.Domain.Entities
 {
@@ -12,7 +13,7 @@ namespace Hospital.Domain.Entities
         public User? Patient { get; set; } 
 
         public DateTime AppointmentDate { get; set; }
-        public string? Status { get; set; } 
+        public AppointmentStatus Status { get; set; }
         public string? Notes { get; set; }
     }
 }
