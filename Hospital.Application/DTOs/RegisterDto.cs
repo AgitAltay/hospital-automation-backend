@@ -17,6 +17,7 @@ namespace Hospital.Application.DTOs
 
         [Required]
         public string LastName { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
 
         // Hatanın sebebi bu özelliğin eksik olmasıydı.
         [Required]

@@ -27,5 +27,20 @@ namespace Hospital.Infrastructure.Repositories
                 .Include(u => u.Role) // JOIN işlemi
                 .FirstOrDefaultAsync(u => u.Email == email);
         }
+
+        public async Task<List<User>?> GetByFirstNameAsync(string username)
+        {
+            return await _dbSet.Include(u => u.FirstName).ToListAsync();
+        }
+
+        public async Task<List<User>?> GetByLastNameAsync(string username)
+        {
+            return await _dbSet.Include(u => u.LastName).ToListAsync();
+        }
+
+        public async Task<List<User>?> GetByPhoneNumberAsync(string phoneNumber)
+        {
+            return await _dbSet.Include(u => u.PhoneNumber).ToListAsync();
+        }
     }
 }

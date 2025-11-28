@@ -48,6 +48,7 @@ namespace Hospital.Application.Services.Implementations
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 RoleId = registerDto.RoleId,
+                PhoneNumber = registerDto.PhoneNumber,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 CreatedDate = DateTime.UtcNow,
