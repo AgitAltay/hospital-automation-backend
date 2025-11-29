@@ -15,7 +15,7 @@ namespace Hospital.Infrastructure.UOW
         private IGenericRepository<Role>? _roles;
         private IGenericRepository<Doctor>? _doctors;
         private IGenericRepository<Specialty>? _specialties;
-        private IGenericRepository<Appointment>? _appointments;
+        private IAppointmentRepository? _appointments;
         private IGenericRepository<PatientComplaint>? _patientComplaints;
 
         public UnitOfWork(ApplicationDbContext context)
@@ -26,10 +26,12 @@ namespace Hospital.Infrastructure.UOW
         // Public properties (İstendiğinde oluşturulur - Lazy Loading)
         // DİKKAT: Users için özel repository kullanıyoruz.
         public IUserRepository Users => _users ??= new UserRepository(_context);
+        
+        public IAppointmentRepository Appointments => _appointments ??= new AppointmentRepository(_context);
+        
         public IGenericRepository<Role> Roles => _roles ??= new GenericRepository<Role>(_context);
         public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
         public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
-        public IGenericRepository<Appointment> Appointments => _appointments ??= new GenericRepository<Appointment>(_context);
         public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
 
         // Değişiklikleri veritabanına kaydet

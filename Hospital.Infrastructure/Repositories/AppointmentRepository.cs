@@ -84,4 +84,57 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
             .OrderByDescending(a => a.AppointmentDate)
             .ToListAsync();
     }
+    
+    
+    // hastanın aynı saate randevu almasını engellemek için
+    public async Task<bool> IsPatientAvailableAsync(int patientId, DateTime date)
+    {
+        bool isBusy = await _context.Appointments
+            .AnyAsync(a => a.PatientId == patientId 
+                           && a.AppointmentDate == date 
+                           && a.Status != AppointmentStatus.Cancelled);
+
+        return !isBusy;
+    }
+    
+    // hastanın aktif randevularını sayı olarak döndürür. Daha sonra alınabilecek randevu sayısını kısıtlamak için
+    public async Task<int> GetPatientActiveAppointmentCountAsync(int patientId)
+    {
+        return await _context.Appointments
+            .CountAsync(a => a.PatientId == patientId 
+                             && a.Status == AppointmentStatus.Active);
+    }
+
+    // genel filtreleme 
+    public async Task<List<Appointment>> GetByFilterAsync(int? doctorId, int? patientId, DateTime? startDate, DateTime? endDate)
+    {
+        var query = _context.Appointments.AsQueryable();
+
+        query = query.Include(a => a.Patient).Include(a => a.Doctor).ThenInclude(d => d.Specialty);
+
+        if (doctorId.HasValue)
+            query = query.Where(a => a.DoctorId == doctorId.Value);
+
+        if (patientId.HasValue)
+            query = query.Where(a => a.PatientId == patientId.Value);
+
+        if (startDate.HasValue)
+            query = query.Where(a => a.AppointmentDate >= startDate.Value);
+
+        if (endDate.HasValue)
+            query = query.Where(a => a.AppointmentDate <= endDate.Value);
+
+        return await query.OrderBy(a => a.AppointmentDate).ToListAsync();    }
+
+    // departmanın günlük randevularını getirmek için
+    public async Task<List<Appointment>> GetDailyAppointmentsByDepartmentAsync(int departmentId, DateTime date)
+    {
+        return await _context.Appointments
+            .Include(a => a.Doctor)
+            .Include(a => a.Patient)
+            .Where(a => a.Doctor.SpecialtyId == departmentId
+                        && a.AppointmentDate.Date == date.Date)
+            .OrderBy(a => a.AppointmentDate)
+            .ToListAsync();
+    }
 }
