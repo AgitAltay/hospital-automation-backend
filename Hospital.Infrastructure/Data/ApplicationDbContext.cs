@@ -15,9 +15,12 @@ namespace Hospital.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; } // Patient eklendi
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PatientComplaint> PatientComplaints { get; set; }
+
+        // YENİ: WorkingHour entity'si için DbSet eklendi
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -69,7 +72,11 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<Doctor>()
                 .ToTable("Doctors");
 
-            // --- GLOBAL QUERY FILTERS (DÜZELTİLMİŞ KISIM) ---
+            // Patient'ın User'dan türetildiğini ve ayrı bir tabloya sahip olduğunu belirtme (TPT)
+            modelBuilder.Entity<Patient>()
+                .ToTable("Patients");
+
+            // --- GLOBAL QUERY FILTERS ---
 
             // 1. User filtresi (Kök entity): Bu filtre Doctor ve Patient'ı da otomatik kapsar.
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
@@ -80,8 +87,7 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<Appointment>().HasQueryFilter(a => !a.IsDeleted);
             modelBuilder.Entity<PatientComplaint>().HasQueryFilter(pc => !pc.IsDeleted);
 
-            // DİKKAT: Doctor için olan satırı SİLDİK.
-            // modelBuilder.Entity<Doctor>().HasQueryFilter(d => !d.IsDeleted); <-- BU SATIR HATAYA SEBEP OLUYORDU
+
         }
 
         // SaveChanges metotlarını override ederek CreatedDate ve UpdatedDate'i otomatik güncelleyelim

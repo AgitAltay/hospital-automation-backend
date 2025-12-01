@@ -28,12 +28,12 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
             .ToListAsync();
     }
 
-    public async Task<Appointment?> GetByAppointmentIdAsync(int appointmentId)
+    public async Task<Appointment?> GetByAppointmentIdAsync(int id)
     {
         return await _context.Appointments
-            .Include(a => a.Patient) 
+            .Include(a => a.Patient)
             .Include(a => a.Doctor)
-            .FirstOrDefaultAsync(a => a.AppointmentId == appointmentId);
+            .FirstOrDefaultAsync(a => a.Id == id); 
     }
 
     public async Task<List<Appointment>> GetPatientHistoryAsync(int patientId)
@@ -132,8 +132,8 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
         return await _context.Appointments
             .Include(a => a.Doctor)
             .Include(a => a.Patient)
-            .Where(a => a.Doctor.SpecialtyId == departmentId
-                        && a.AppointmentDate.Date == date.Date)
+            .Where(a => a.Doctor != null && a.Doctor.SpecialtyId == departmentId
+             && a.AppointmentDate.Date == date.Date)
             .OrderBy(a => a.AppointmentDate)
             .ToListAsync();
     }

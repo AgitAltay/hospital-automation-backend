@@ -1,4 +1,9 @@
-﻿namespace Hospital.Domain.Entities
+﻿using System.Reflection;
+
+using Hospital.Domain.Enums;
+
+
+namespace Hospital.Domain.Entities
 {
     public class User : BaseEntity
     {
@@ -9,12 +14,8 @@
         public required string LastName { get; set; }
         public required string PhoneNumber { get; set; }
         public int RoleId { get; set; } 
-        public Role? Role { get; set; } 
-        public enum Gender
-        {
-            Male,
-            Female
-        }
+        public Role? Role { get; set; }
+        public GenderStatus Gender { get; set; }
 
     }
 }
