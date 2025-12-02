@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Hospital.Domain.Entities;
 using Hospital.Application.DTOs.AppointmentDTOs;
+using Hospital.Application.DTOs.SpecialtyDTOs; 
 
 namespace Hospital.Application.Mappings
 {
@@ -11,10 +12,12 @@ namespace Hospital.Application.Mappings
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
 
-            CreateMap<Appointment, AppointmentListDto>()
-                .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Doctor.FirstName + " " + src.Doctor.LastName))
-                .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => src.Patient.FirstName + " " + src.Patient.LastName))
-                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Doctor.Specialty.Name));
+            CreateMap<Appointment, AppointmentListDto>();
+
+
+            CreateMap<Specialty, SpecialtyDto>();
+            CreateMap<CreateSpecialtyDto, Specialty>();
+            CreateMap<UpdateSpecialtyDto, Specialty>();
         }
     }
 }

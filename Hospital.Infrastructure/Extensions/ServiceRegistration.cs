@@ -6,6 +6,8 @@ using Hospital.Infrastructure.UOW;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Hospital.Application.Interfaces; 
+using Hospital.Application.Services; 
 
 namespace Hospital.Infrastructure.Extensions
 {
@@ -24,6 +26,10 @@ namespace Hospital.Infrastructure.Extensions
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
+
+            services.AddScoped<ISpecialtyService, SpecialtyService>();
+
+            services.AddScoped<IAppointmentService, AppointmentService>();
         }
     }
 }
