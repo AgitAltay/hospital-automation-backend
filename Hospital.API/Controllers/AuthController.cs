@@ -4,9 +4,11 @@ using Hospital.Domain.Enums; // Role enum'� burada
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
+using System.Runtime.CompilerServices;
+using AutoMapper;
 using Hospital.Application.Services;
 using Hospital.Domain.Entities;
-using Hospital.Domain.Constants;
+using LoggerManager.Interface;
 
 namespace Hospital.API.Controllers
 {
@@ -16,6 +18,7 @@ namespace Hospital.API.Controllers
     {
         // Alan ad� sizin kodunuzdaki gibi _authService olarak tan�mland�.
         private readonly IAuthAppService _authService;
+        private readonly ILoggerManager _logger;
 
         // Dependency Injection (Constructor Injection)
         // Program.cs'te kaydetti�imiz IAuthAppService'i buraya enjekte ediyoruz.
@@ -30,17 +33,13 @@ namespace Hospital.API.Controllers
         {
             try
             {
-                // ARTIK HASTA KAYDI YOK. Sadece Doktor (ve ileride Admin) kayd� yap�lacak.
-                // Gelen t�m kay�t isteklerini varsay�lan olarak "Doctor" rol�ne at�yoruz.
-
-                // Role.Doctor yerine Roles.Doctor kullan�yoruz.
                 var userDto = await _authService.RegisterAsync(registerDto);
-
+                _logger.LogInfo("User created successfully !");
                 return Ok(userDto);
             }
             catch (Exception ex)
             {
-                // Hata mesaj�n� d�n�yoruz
+                _logger.LogError(ex.Message);
                 return BadRequest(new { Message = ex.Message });
             }
         }

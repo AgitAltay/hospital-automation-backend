@@ -1,4 +1,6 @@
-﻿namespace Hospital.Domain.Entities
+﻿using Hospital.Domain.Enums;
+
+namespace Hospital.Domain.Entities
 {
     public class Doctor : User 
     {
