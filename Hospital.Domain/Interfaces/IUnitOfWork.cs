@@ -10,8 +10,7 @@ namespace Hospital.Domain.Interfaces
         IUserRepository Users { get; }
         IAppointmentRepository Appointments { get; }
 
-        // Diğerleri generic kalabilir çünkü özel bir sorgu yapmıyoruz (şimdilik).
-        IGenericRepository<Role> Roles { get; }
+        IPatientRepository Patient { get; }
         IGenericRepository<Doctor> Doctors { get; }
         IGenericRepository<Specialty> Specialties { get; }
         IGenericRepository<PatientComplaint> PatientComplaints { get; }

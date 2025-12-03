@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,7 @@ builder.Services.AddInfrastructureServices(builder.Configuration);
 
 // Application katmanýndaki servisleri (AuthAppService vb.) ekle.
 builder.Services.AddApplicationServices();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 
 // --- JWT KÝMLÝK DOÐRULAMA KONFÝGÜRASYONU ---

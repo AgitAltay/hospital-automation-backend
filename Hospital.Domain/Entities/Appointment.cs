@@ -11,6 +11,7 @@ namespace Hospital.Domain.Entities
         public int PatientId { get; set; } 
         public Patient? Patient { get; set; } 
 
+
         public DateTime AppointmentDate { get; set; }
         public AppointmentStatus Status { get; set; }
         public string? Notes { get; set; }

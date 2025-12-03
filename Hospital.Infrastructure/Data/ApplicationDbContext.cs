@@ -15,12 +15,10 @@ namespace Hospital.Infrastructure.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Patient> Patients { get; set; } // Patient eklendi
+        public DbSet<Patient> Patients { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PatientComplaint> PatientComplaints { get; set; }
-
-        // YENİ: WorkingHour entity'si için DbSet eklendi
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -54,31 +52,48 @@ namespace Hospital.Infrastructure.Data
                 .HasForeignKey(a => a.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Appointment - Patient (User) ilişkisi
+            // Appointment - Patient ilişkisi
             modelBuilder.Entity<Appointment>()
                 .HasOne(a => a.Patient)
                 .WithMany()
                 .HasForeignKey(a => a.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // PatientComplaint - Patient (User) ilişkisi
+            // PatientComplaint - Patient ilişkisi
             modelBuilder.Entity<PatientComplaint>()
                 .HasOne(pc => pc.Patient)
                 .WithMany()
                 .HasForeignKey(pc => pc.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // Doctor'ın User'dan türetildiğini ve ayrı bir tabloya sahip olduğunu belirtme (TPT)
             modelBuilder.Entity<Doctor>()
                 .ToTable("Doctors");
 
-            // Patient'ın User'dan türetildiğini ve ayrı bir tabloya sahip olduğunu belirtme (TPT)
-            modelBuilder.Entity<Patient>()
-                .ToTable("Patients");
+            modelBuilder.Entity<Patient>(entity =>
+            {
+                entity.HasIndex(p => p.TcKimlikNo).IsUnique();
 
-            // --- GLOBAL QUERY FILTERS ---
+                entity.Property(p => p.TcKimlikNo)
+                      .IsRequired()
+                      .HasMaxLength(11)
+                      .IsFixedLength(); 
 
-            // 1. User filtresi (Kök entity): Bu filtre Doctor ve Patient'ı da otomatik kapsar.
+                entity.Property(p => p.FirstName)
+                      .IsRequired()
+                      .HasMaxLength(50);
+
+                entity.Property(p => p.LastName)
+                      .IsRequired()
+                      .HasMaxLength(50);
+
+                entity.Property(p => p.PhoneNumber)
+                      .IsRequired()
+                      .HasMaxLength(20);
+
+            });
+
+
+
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
 
             // 2. Diğer bağımsız entity'ler için filtreler:
@@ -87,10 +102,9 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<Appointment>().HasQueryFilter(a => !a.IsDeleted);
             modelBuilder.Entity<PatientComplaint>().HasQueryFilter(pc => !pc.IsDeleted);
 
-
+            modelBuilder.Entity<Patient>().HasQueryFilter(p => !p.IsDeleted);
         }
 
-        // SaveChanges metotlarını override ederek CreatedDate ve UpdatedDate'i otomatik güncelleyelim
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
@@ -103,7 +117,7 @@ namespace Hospital.Infrastructure.Data
                     case EntityState.Modified:
                         entry.Entity.UpdatedDate = DateTime.UtcNow;
                         break;
-                    case EntityState.Deleted: // Soft delete
+                    case EntityState.Deleted: 
                         entry.State = EntityState.Modified;
                         entry.Entity.IsDeleted = true;
                         entry.Entity.UpdatedDate = DateTime.UtcNow;
