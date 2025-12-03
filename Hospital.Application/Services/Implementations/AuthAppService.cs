@@ -35,7 +35,7 @@ namespace Hospital.Application.Services.Implementations
             _authService.CreatePasswordHash(registerDto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 
             // 3. Rol Kontrolü: Belirtilen rol var mı?
-            var role = await _unitOfWork.Roles.GetByIdAsync(registerDto.RoleId);
+            var role = await _unitOfWork.Users.GetByIdAsync(registerDto.RoleId);
             if (role == null)
             {
                 return new AuthResponseDto { Success = false, Message = "Geçersiz rol ID'si." };
@@ -68,8 +68,7 @@ namespace Hospital.Application.Services.Implementations
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    RoleName = role.Name // Rol adını da ekliyoruz.
+                    LastName = user.LastName, 
                 }
             };
         }

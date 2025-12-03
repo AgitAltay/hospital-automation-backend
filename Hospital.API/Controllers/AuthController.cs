@@ -1,6 +1,6 @@
 using Hospital.Application.DTOs;
 using Hospital.Application.Interfaces;
-using Hospital.Domain.Enums; // Role enum'ý burada
+using Hospital.Domain.Enums; // Role enum'ï¿½ burada
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using System;
@@ -14,33 +14,33 @@ namespace Hospital.API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-        // Alan adý sizin kodunuzdaki gibi _authService olarak tanýmlandý.
+        // Alan adï¿½ sizin kodunuzdaki gibi _authService olarak tanï¿½mlandï¿½.
         private readonly IAuthAppService _authService;
 
         // Dependency Injection (Constructor Injection)
-        // Program.cs'te kaydettiðimiz IAuthAppService'i buraya enjekte ediyoruz.
+        // Program.cs'te kaydettiï¿½imiz IAuthAppService'i buraya enjekte ediyoruz.
         public AuthController(IAuthAppService authService)
         {
             _authService = authService;
         }
 
-        // Register (Sadece Doktor Kaydý)
+        // Register (Sadece Doktor Kaydï¿½)
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
             try
             {
-                // ARTIK HASTA KAYDI YOK. Sadece Doktor (ve ileride Admin) kaydý yapýlacak.
-                // Gelen tüm kayýt isteklerini varsayýlan olarak "Doctor" rolüne atýyoruz.
+                // ARTIK HASTA KAYDI YOK. Sadece Doktor (ve ileride Admin) kaydï¿½ yapï¿½lacak.
+                // Gelen tï¿½m kayï¿½t isteklerini varsayï¿½lan olarak "Doctor" rolï¿½ne atï¿½yoruz.
 
-                // Role.Doctor yerine Roles.Doctor kullanýyoruz.
-                var userDto = await _authService.RegisterAsync(registerDto, Roles.Doctor);
+                // Role.Doctor yerine Roles.Doctor kullanï¿½yoruz.
+                var userDto = await _authService.RegisterAsync(registerDto);
 
                 return Ok(userDto);
             }
             catch (Exception ex)
             {
-                // Hata mesajýný dönüyoruz
+                // Hata mesajï¿½nï¿½ dï¿½nï¿½yoruz
                 return BadRequest(new { Message = ex.Message });
             }
         }
@@ -51,13 +51,13 @@ namespace Hospital.API.Controllers
         {
             try
             {
-                // Burada da _authService kullanýldý.
+                // Burada da _authService kullanï¿½ldï¿½.
                 var authResponse = await _authService.LoginAsync(loginDto);
                 return Ok(authResponse);
             }
             catch (Exception ex)
             {
-                // Kullanýcý bulunamadý veya þifre yanlýþ hatasý
+                // Kullanï¿½cï¿½ bulunamadï¿½ veya ï¿½ifre yanlï¿½ï¿½ hatasï¿½
                 return Unauthorized(new { Message = ex.Message });
             }
         }
