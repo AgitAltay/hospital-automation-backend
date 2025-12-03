@@ -11,7 +11,7 @@ namespace Hospital.Application.Mappings
         {
             CreateMap<CreateAppointmentDto, Appointment>();
             CreateMap<UpdateAppointmentDto, Appointment>();
-
+            CreateMap<CreateAppointmentPublicDto, Patient>();
             CreateMap<Appointment, AppointmentListDto>();
 
 

@@ -4,6 +4,7 @@ using Hospital.Infrastructure.Data;
 using Hospital.Infrastructure.Repositories;
 using System.Threading.Tasks;
 
+
 namespace Hospital.Infrastructure.UOW
 {
     public class UnitOfWork : IUnitOfWork
@@ -17,6 +18,7 @@ namespace Hospital.Infrastructure.UOW
         private IGenericRepository<Specialty>? _specialties;
         private IAppointmentRepository? _appointments;
         private IGenericRepository<PatientComplaint>? _patientComplaints;
+        private IPatientRepository? _patients;
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -33,6 +35,7 @@ namespace Hospital.Infrastructure.UOW
         public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
         public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
         public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
+        public IPatientRepository Patients => _patients ??= new PatientRepository(_context);
 
         // Değişiklikleri veritabanına kaydet
         public async Task<int> CompleteAsync()

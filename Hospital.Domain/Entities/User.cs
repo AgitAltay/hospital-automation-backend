@@ -15,7 +15,7 @@ namespace Hospital.Domain.Entities
         public required string PhoneNumber { get; set; }
         public int RoleId { get; set; } 
         public Role? Role { get; set; }
-        public GenderStatus Gender { get; set; }
+        public Gender Gender { get; set; }
 
     }
 }

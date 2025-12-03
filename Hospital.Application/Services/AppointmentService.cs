@@ -3,7 +3,8 @@ using Hospital.Application.DTOs.AppointmentDTOs;
 using Hospital.Application.Interfaces;
 using Hospital.Domain.Entities;
 using Hospital.Domain.Enums;
-using Hospital.Domain.Interfaces; // IUnitOfWork burada
+using Hospital.Domain.Interfaces;
+using Hospital.Application.Services;
 
 namespace Hospital.Application.Services
 {
@@ -97,6 +98,56 @@ namespace Hospital.Application.Services
 
              _unitOfWork.Appointments.Update(appointment);
              await _unitOfWork.CompleteAsync();
+        }
+
+        public async Task CreatePublicAsync(CreateAppointmentPublicDto input)
+        {
+
+            var isDoctorAvailable = await _unitOfWork.Appointments
+                .IsDoctorAvailableAsync(input.DoctorId, input.AppointmentDate);
+
+            if (!isDoctorAvailable)
+            {
+                throw new Exception("Seçilen tarih ve saatte doktor müsait değil.");
+            }
+
+
+            Patient patient;
+
+            // DİKKAT: Burası çalışmayacak çünkü IUnitOfWork içinde henüz
+            // 'Patients' adında özel bir repository ve 'GetByTcKimlikNoAsync' metodu yok.
+            // Bir sonraki adımda Infrastructure katmanında bunu ekleyeceğiz.
+            // Şimdilik mantığı kuralım.
+            /*
+            patient = await _unitOfWork.Patients.GetByTcKimlikNoAsync(input.TcKimlikNo);
+
+            if (patient == null)
+            {
+                // Hasta yoksa, formdan gelen bilgilerle yeni bir hasta entity'si oluştur.
+                // AutoMapper burada devreye giriyor.
+                patient = _mapper.Map<Patient>(input);
+
+                // Yeni hastayı veritabanına ekle.
+                await _unitOfWork.Patients.AddAsync(patient);
+                
+                // Değişiklikleri kaydet ki hastanın yeni ID'si oluşsun.
+                await _unitOfWork.CompleteAsync();
+            }
+            */
+            // GEÇİCİ KOD (Altyapı hazır olana kadar derleme hatası vermemesi için):
+            throw new NotImplementedException("Altyapı katmanında (Repository) TCKN ile hasta arama metodu henüz hazırlanmadı.");
+
+
+            // 3. Randevu Oluşturma
+            // DTO'dan Appointment entity'sine dönüşüm yap.
+            var appointment = _mapper.Map<Appointment>(input);
+
+            // Bulunan veya yeni oluşturulan hastanın ID'sini ata.
+            // appointment.PatientId = patient.Id; // Altyapı hazır olunca açılacak
+
+            // Randevuyu kaydet
+            await _unitOfWork.Appointments.AddAsync(appointment);
+            await _unitOfWork.CompleteAsync();
         }
 
         public async Task<List<AppointmentListDto>> SearchAppointmentsAsync(int? doctorId, int? patientId, DateTime? startDate, DateTime? endDate)
