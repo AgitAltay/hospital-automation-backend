@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using AutoMapper;
+using Hospital.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
-// --- SWAGGER JWT KONFÝGÜRASYONU ---
+// --- SWAGGER JWT KONFï¿½Gï¿½RASYONU ---
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hospital Automation API", Version = "v1" });
@@ -35,7 +36,7 @@ builder.Services.AddSwaggerGen(c =>
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
-                },
+                }, 
                 Scheme = "oauth2",
                 Name = "Bearer",
                 In = ParameterLocation.Header,
@@ -45,16 +46,16 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// --- KATMANLARIN SERVÝS KAYITLARI ---
-// Infrastructure katmanýndaki servisleri (DbContext vb.) ekle.
+// --- KATMANLARIN SERVï¿½S KAYITLARI ---
+// Infrastructure katmanï¿½ndaki servisleri (DbContext vb.) ekle.
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// Application katmanýndaki servisleri (AuthAppService vb.) ekle.
+// Application katmanï¿½ndaki servisleri (AuthAppService vb.) ekle.
 builder.Services.AddApplicationServices();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(cfg => {}, typeof(Program).Assembly);
 
 
-// --- JWT KÝMLÝK DOÐRULAMA KONFÝGÜRASYONU ---
+// --- JWT Kï¿½MLï¿½K DOï¿½RULAMA KONFï¿½Gï¿½RASYONU ---
 var tokenKey = builder.Configuration.GetValue<string>("AppSettings:Token");
 if (string.IsNullOrEmpty(tokenKey))
 {
@@ -86,8 +87,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// --- MÝDDLEWARE SIRASI ÖNEMLÝDÝR ---
-app.UseAuthentication(); // Kimlik Doðrulama
+// --- Mï¿½DDLEWARE SIRASI ï¿½NEMLï¿½Dï¿½R ---
+app.UseAuthentication(); // Kimlik Doï¿½rulama
 app.UseAuthorization();  // Yetkilendirme
 
 app.MapControllers();

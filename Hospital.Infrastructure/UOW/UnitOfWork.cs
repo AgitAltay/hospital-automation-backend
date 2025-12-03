@@ -30,7 +30,8 @@ namespace Hospital.Infrastructure.UOW
         public IUserRepository Users => _users ??= new UserRepository(_context);
         
         public IAppointmentRepository Appointments => _appointments ??= new AppointmentRepository(_context);
-        
+        public IPatientRepository Patient { get; }
+
         public IGenericRepository<Role> Roles => _roles ??= new GenericRepository<Role>(_context);
         public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
         public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
