@@ -50,8 +50,7 @@ namespace Hospital.Infrastructure.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.Role?.Name ?? "Patient")
-            };
+                new Claim(ClaimTypes.Role, user.Role.ToString())           };
 
             var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
             if (appSettingsToken == null)

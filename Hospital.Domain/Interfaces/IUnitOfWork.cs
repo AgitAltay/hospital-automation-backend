@@ -6,7 +6,6 @@ namespace Hospital.Domain.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        // DİKKAT: Burayı IGenericRepository<User> yerine IUserRepository yaptık.
         IUserRepository Users { get; }
         IAppointmentRepository Appointments { get; }
 

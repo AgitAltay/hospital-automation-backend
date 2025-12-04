@@ -13,7 +13,6 @@ namespace Hospital.Infrastructure.UOW
 
         // Backing fields (Lazy loading için gizli alanlar)
         private IUserRepository? _users;
-        private IGenericRepository<Role>? _roles;
         private IGenericRepository<Doctor>? _doctors;
         private IGenericRepository<Specialty>? _specialties;
         private IAppointmentRepository? _appointments;
@@ -32,7 +31,6 @@ namespace Hospital.Infrastructure.UOW
         public IAppointmentRepository Appointments => _appointments ??= new AppointmentRepository(_context);
         public IPatientRepository Patient { get; }
 
-        public IGenericRepository<Role> Roles => _roles ??= new GenericRepository<Role>(_context);
         public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
         public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
         public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
