@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AIService\AIService.csproj" />
     <ProjectReference Include="..\Hospital.Application\Hospital.Application.csproj" />
     <ProjectReference Include="..\Hospital.Infrastructure\Hospital.Infrastructure.csproj" />
     <ProjectReference Include="..\LoggerManager\LoggerManager.csproj" />

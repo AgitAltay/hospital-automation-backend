@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.API", "Hospital.AP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerManager", "LoggerManager\LoggerManager.csproj", "{9624C0A2-7CA3-4600-9A4E-117E5455423F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIService", "AIService\AIService.csproj", "{3643B0D5-4E29-4387-80B3-7C92C12B1D17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,18 @@ Global
 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x64.Build.0 = Release|Any CPU
 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.ActiveCfg = Release|Any CPU
 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.Build.0 = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x64.Build.0 = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x86.Build.0 = Debug|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x64.ActiveCfg = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x64.Build.0 = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x86.ActiveCfg = Release|Any CPU
+		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
