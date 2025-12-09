@@ -1,0 +1,86 @@
+Index: AIService/Interface/IAIService.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/AIService/Interface/IAIService.cs b/AIService/Interface/IAIService.cs
+new file mode 100644
+--- /dev/null	(date 1765285325306)
++++ b/AIService/Interface/IAIService.cs	(date 1765285325306)
+@@ -0,0 +1,8 @@
++using AIService.Models;
++
++namespace AIService.Interface;
++
++public interface IAIService
++{
++    Task<PredictionResponse> Predict(string text);
++}
+\ No newline at end of file
+Index: HospitalAutomation.sln
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\r\nMicrosoft Visual Studio Solution File, Format Version 12.00\r\n# Visual Studio Version 17\r\nVisualStudioVersion = 17.0.31903.59\r\nMinimumVisualStudioVersion = 10.0.40219.1\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Hospital.Domain\", \"Hospital.Domain\\Hospital.Domain.csproj\", \"{57644BD5-821F-4588-AC41-5B525F4C28CA}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Hospital.Application\", \"Hospital.Application\\Hospital.Application.csproj\", \"{3AEBA677-AEF3-4148-AE64-48964DCC9E73}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Hospital.Infrastructure\", \"Hospital.Infrastructure\\Hospital.Infrastructure.csproj\", \"{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"Hospital.API\", \"Hospital.API\\Hospital.API.csproj\", \"{E698F773-1A2C-4246-BB11-1A823494BFF7}\"\r\nEndProject\r\nProject(\"{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}\") = \"LoggerManager\", \"LoggerManager\\LoggerManager.csproj\", \"{9624C0A2-7CA3-4600-9A4E-117E5455423F}\"\r\nEndProject\r\nGlobal\r\n\tGlobalSection(SolutionConfigurationPlatforms) = preSolution\r\n\t\tDebug|Any CPU = Debug|Any CPU\r\n\t\tDebug|x64 = Debug|x64\r\n\t\tDebug|x86 = Debug|x86\r\n\t\tRelease|Any CPU = Release|Any CPU\r\n\t\tRelease|x64 = Release|x64\r\n\t\tRelease|x86 = Release|x86\r\n\tEndGlobalSection\r\n\tGlobalSection(ProjectConfigurationPlatforms) = postSolution\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|x64.ActiveCfg = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|x64.Build.0 = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|x86.ActiveCfg = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Debug|x86.Build.0 = Debug|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|x64.ActiveCfg = Release|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|x64.Build.0 = Release|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|x86.ActiveCfg = Release|Any CPU\r\n\t\t{57644BD5-821F-4588-AC41-5B525F4C28CA}.Release|x86.Build.0 = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|x64.ActiveCfg = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|x64.Build.0 = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|x86.ActiveCfg = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Debug|x86.Build.0 = Debug|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|x64.ActiveCfg = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|x64.Build.0 = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|x86.ActiveCfg = Release|Any CPU\r\n\t\t{3AEBA677-AEF3-4148-AE64-48964DCC9E73}.Release|x86.Build.0 = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|x64.ActiveCfg = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|x64.Build.0 = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|x86.ActiveCfg = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Debug|x86.Build.0 = Debug|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x64.ActiveCfg = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x64.Build.0 = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x86.ActiveCfg = Release|Any CPU\r\n\t\t{164D449A-6EA9-4BC6-AC4A-6F4CE90A056D}.Release|x86.Build.0 = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x64.ActiveCfg = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x64.Build.0 = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x86.ActiveCfg = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Debug|x86.Build.0 = Debug|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x64.ActiveCfg = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x64.Build.0 = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x86.ActiveCfg = Release|Any CPU\r\n\t\t{E698F773-1A2C-4246-BB11-1A823494BFF7}.Release|x86.Build.0 = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|Any CPU.Build.0 = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|x64.ActiveCfg = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|x64.Build.0 = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|x86.ActiveCfg = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Debug|x86.Build.0 = Debug|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|Any CPU.ActiveCfg = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|Any CPU.Build.0 = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x64.ActiveCfg = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x64.Build.0 = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.ActiveCfg = Release|Any CPU\r\n\t\t{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.Build.0 = Release|Any CPU\r\n\tEndGlobalSection\r\n\tGlobalSection(SolutionProperties) = preSolution\r\n\t\tHideSolutionNode = FALSE\r\n\tEndGlobalSection\r\nEndGlobal\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/HospitalAutomation.sln b/HospitalAutomation.sln
+--- a/HospitalAutomation.sln	(revision 0b33323878b5be8336d3c5e33e4acbab640c65e9)
++++ b/HospitalAutomation.sln	(date 1765284943335)
+@@ -13,6 +13,8 @@
+ EndProject
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerManager", "LoggerManager\LoggerManager.csproj", "{9624C0A2-7CA3-4600-9A4E-117E5455423F}"
+ EndProject
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIService", "AIService\AIService.csproj", "{3643B0D5-4E29-4387-80B3-7C92C12B1D17}"
++EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Any CPU = Debug|Any CPU
+@@ -83,6 +85,18 @@
+ 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x64.Build.0 = Release|Any CPU
+ 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.ActiveCfg = Release|Any CPU
+ 		{9624C0A2-7CA3-4600-9A4E-117E5455423F}.Release|x86.Build.0 = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|Any CPU.Build.0 = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x64.ActiveCfg = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x64.Build.0 = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x86.ActiveCfg = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Debug|x86.Build.0 = Debug|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|Any CPU.ActiveCfg = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|Any CPU.Build.0 = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x64.ActiveCfg = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x64.Build.0 = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x86.ActiveCfg = Release|Any CPU
++		{3643B0D5-4E29-4387-80B3-7C92C12B1D17}.Release|x86.Build.0 = Release|Any CPU
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+Index: AIService/Models/AIServiceModels.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/AIService/Models/AIServiceModels.cs b/AIService/Models/AIServiceModels.cs
+new file mode 100644
+--- /dev/null	(date 1765285064121)
++++ b/AIService/Models/AIServiceModels.cs	(date 1765285064121)
+@@ -0,0 +1,18 @@
++using System.Text.Json.Serialization;
++
++namespace AIService.Models;
++
++public class ComplaintRequest
++{
++    [JsonPropertyName("text")]
++    public required string Text { get; set; }
++}
++
++public class PredictionResponse
++{
++    [JsonPropertyName("label")]
++    public required string Label { get; set; }
++
++    [JsonPropertyName("score")]
++    public float Score { get; set; }
++}
+\ No newline at end of file
