@@ -8,10 +8,10 @@ namespace Hospital.Domain.Interfaces
     {
         IUserRepository Users { get; }
         IAppointmentRepository Appointments { get; }
+        IDoctorRepository Doctors { get; }
+        ISpecialtyRepository Specialties { get; }
 
         IPatientRepository Patients { get; }
-        IGenericRepository<Doctor> Doctors { get; }
-        IGenericRepository<Specialty> Specialties { get; }
         IGenericRepository<PatientComplaint> PatientComplaints { get; }
 
         Task<int> CompleteAsync();

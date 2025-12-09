@@ -1,4 +1,5 @@
 ﻿using Hospital.Domain.Entities;
+using Hospital.Domain.Enums; 
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Threading;
@@ -13,8 +14,7 @@ namespace Hospital.Infrastructure.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<Doctor> Doctors { get; set; }
-        public DbSet<Patient> Patients { get; set; } 
+        public DbSet<Patient> Patients { get; set; }
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PatientComplaint> PatientComplaints { get; set; }
@@ -23,40 +23,24 @@ namespace Hospital.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<User>(entity =>
+            {
+             
+                entity.Property(u => u.Role)
+                    .HasConversion<string>();
+            });
 
+            modelBuilder.Entity<Doctor>(entity =>
+            {
+                entity.Property(d => d.LicenseNumber).IsRequired().HasMaxLength(50);
+            });
 
-            // Doctor - Specialty ilişkisi 
-            modelBuilder.Entity<Doctor>()
-                .HasOne(d => d.Specialty)
-                .WithMany(s => s.Doctors)
-                .HasForeignKey(d => d.SpecialtyId)
-                .OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Specialty>(entity =>
+            {
+                entity.Property(s => s.Name).IsRequired().HasMaxLength(100);
+                entity.Property(s => s.Description).HasMaxLength(500);
+            });
 
-            // Appointment - Doctor ilişkisi 
-            modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.Doctor)
-                .WithMany()
-                .HasForeignKey(a => a.DoctorId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // Appointment - Patient ilişkisi 
-            modelBuilder.Entity<Appointment>()
-                .HasOne(a => a.Patient)
-                .WithMany()
-                .HasForeignKey(a => a.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // PatientComplaint - Patient ilişkisi 
-            modelBuilder.Entity<PatientComplaint>()
-                .HasOne(pc => pc.Patient)
-                .WithMany()
-                .HasForeignKey(pc => pc.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            modelBuilder.Entity<Doctor>().ToTable("Doctors");
-            // modelBuilder.Entity<Patient>().ToTable("Patients"); 
-
-            // Patient Konfigürasyonu 
             modelBuilder.Entity<Patient>(entity =>
             {
                 entity.HasIndex(p => p.TcKimlikNo).IsUnique();
@@ -66,8 +50,37 @@ namespace Hospital.Infrastructure.Data
                 entity.Property(p => p.PhoneNumber).IsRequired().HasMaxLength(20);
             });
 
-            // --- GLOBAL QUERY FILTERS ---
+       
+            modelBuilder.Entity<Doctor>()
+                .HasOne(d => d.Specialty)
+                .WithMany(s => s.Doctors)
+                .HasForeignKey(d => d.SpecialtyId)
+                .OnDelete(DeleteBehavior.Restrict);
 
+            // Appointment - Doctor ilişkisi
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Doctor)
+                .WithMany()
+                .HasForeignKey(a => a.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // Appointment - Patient ilişkisi
+            modelBuilder.Entity<Appointment>()
+                .HasOne(a => a.Patient)
+                .WithMany()
+                .HasForeignKey(a => a.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // PatientComplaint - Patient ilişkisi
+            modelBuilder.Entity<PatientComplaint>()
+                .HasOne(pc => pc.Patient)
+                .WithMany()
+                .HasForeignKey(pc => pc.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+          
+
+           
             modelBuilder.Entity<User>().HasQueryFilter(u => !u.IsDeleted);
             modelBuilder.Entity<Specialty>().HasQueryFilter(s => !s.IsDeleted);
             modelBuilder.Entity<Appointment>().HasQueryFilter(a => !a.IsDeleted);
@@ -75,7 +88,6 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<Patient>().HasQueryFilter(p => !p.IsDeleted);
         }
 
-        // SaveChangesAsync 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             foreach (var entry in ChangeTracker.Entries<BaseEntity>())
@@ -88,7 +100,7 @@ namespace Hospital.Infrastructure.Data
                     case EntityState.Modified:
                         entry.Entity.UpdatedDate = DateTime.UtcNow;
                         break;
-                    case EntityState.Deleted: 
+                    case EntityState.Deleted:
                         entry.State = EntityState.Modified;
                         entry.Entity.IsDeleted = true;
                         entry.Entity.UpdatedDate = DateTime.UtcNow;
