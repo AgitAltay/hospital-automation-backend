@@ -7,7 +7,7 @@ namespace Hospital.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize] 
     public class SpecialtyController : ControllerBase
     {
         private readonly ISpecialtyService _specialtyService;
@@ -39,13 +39,15 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")] // İleride eklenecek
         public async Task<IActionResult> Create([FromBody] CreateSpecialtyDto createDto)
         {
             try
             {
-                await _specialtyService.CreateAsync(createDto);
-                return StatusCode(StatusCodes.Status201Created, new { Message = "Uzmanlık alanı başarıyla oluşturuldu." });
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
+                var createdSpecialty = await _specialtyService.CreateAsync(createDto);
+                return CreatedAtAction(nameof(GetById), new { id = createdSpecialty.Id }, createdSpecialty);
             }
             catch (Exception ex)
             {
@@ -54,37 +56,31 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPut]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UpdateSpecialtyDto updateDto)
         {
             try
             {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+
                 await _specialtyService.UpdateAsync(updateDto);
-                return Ok(new { Message = "Uzmanlık alanı başarıyla güncellendi." });
+                return Ok(new { Message = "Branş başarıyla güncellendi." });
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("bulunamadı"))
-                    return NotFound(new { Message = ex.Message });
-
                 return BadRequest(new { Message = ex.Message });
             }
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 await _specialtyService.DeleteAsync(id);
-                return Ok(new { Message = "Uzmanlık alanı başarıyla silindi." });
+                return Ok(new { Message = "Branş başarıyla silindi." });
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("bulunamadı"))
-                    return NotFound(new { Message = ex.Message });
-
                 return BadRequest(new { Message = ex.Message });
             }
         }

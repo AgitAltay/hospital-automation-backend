@@ -3,11 +3,11 @@ using Hospital.Application.DTOs.SpecialtyDTOs;
 using Hospital.Application.Interfaces;
 using Hospital.Domain.Entities;
 using Hospital.Domain.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System;
 
-namespace Hospital.Application.Services
+namespace Hospital.Application.Services.Implementations
 {
     public class SpecialtyService : ISpecialtyService
     {
@@ -29,31 +29,38 @@ namespace Hospital.Application.Services
         public async Task<SpecialtyDto> GetByIdAsync(int id)
         {
             var specialty = await _unitOfWork.Specialties.GetByIdAsync(id);
-            if (specialty == null)
-            {
-                throw new Exception("Uzmanlık alanı bulunamadı.");
-            }
+            if (specialty == null) throw new Exception("Branş bulunamadı.");
             return _mapper.Map<SpecialtyDto>(specialty);
         }
 
-        public async Task CreateAsync(CreateSpecialtyDto createDto)
+        public async Task<SpecialtyDto> CreateAsync(CreateSpecialtyDto createDto)
         {
-            var specialty = _mapper.Map<Specialty>(createDto);
+            if (await _unitOfWork.Specialties.SpecialtyExistsAsync(createDto.Name))
+            {
+                throw new Exception($"'{createDto.Name}' isimli branş zaten mevcut.");
+            }
 
+            var specialty = _mapper.Map<Specialty>(createDto);
+            
             await _unitOfWork.Specialties.AddAsync(specialty);
             await _unitOfWork.CompleteAsync();
+
+            return _mapper.Map<SpecialtyDto>(specialty);
         }
 
         public async Task UpdateAsync(UpdateSpecialtyDto updateDto)
         {
             var specialty = await _unitOfWork.Specialties.GetByIdAsync(updateDto.Id);
-            if (specialty == null)
+            if (specialty == null) throw new Exception("Güncellenecek branş bulunamadı.");
+
+            if (specialty.Name.ToLower() != updateDto.Name.ToLower() && 
+                await _unitOfWork.Specialties.SpecialtyExistsAsync(updateDto.Name))
             {
-                throw new Exception("Güncellenecek uzmanlık alanı bulunamadı.");
+                throw new Exception($"'{updateDto.Name}' isimli branş zaten mevcut.");
             }
 
             _mapper.Map(updateDto, specialty);
-
+            
             _unitOfWork.Specialties.Update(specialty);
             await _unitOfWork.CompleteAsync();
         }
@@ -61,13 +68,10 @@ namespace Hospital.Application.Services
         public async Task DeleteAsync(int id)
         {
             var specialty = await _unitOfWork.Specialties.GetByIdAsync(id);
-            if (specialty == null)
-            {
-                throw new Exception("Silinecek uzmanlık alanı bulunamadı.");
-            }
+            if (specialty == null) throw new Exception("Silinecek branş bulunamadı.");
+            
 
-            // Repository'deki Delete metodu soft delete (IsDeleted = true) yapacak şekilde ayarlanmıştı.
-            _unitOfWork.Specialties.Remove(specialty);
+            _unitOfWork.Specialties.Remove(specialty); 
             await _unitOfWork.CompleteAsync();
         }
     }

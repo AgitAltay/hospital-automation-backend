@@ -6,11 +6,13 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Hospital.Application.Mappings;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 
 // --- SWAGGER JWT KONF�G�RASYONU ---
 builder.Services.AddSwaggerGen(c =>

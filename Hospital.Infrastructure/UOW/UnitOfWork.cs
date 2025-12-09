@@ -11,8 +11,8 @@ namespace Hospital.Infrastructure.UOW
         private readonly ApplicationDbContext _context;
 
         private IUserRepository? _users;
-        private IGenericRepository<Doctor>? _doctors;
-        private IGenericRepository<Specialty>? _specialties;
+        private IDoctorRepository? _doctors;
+        private ISpecialtyRepository? _specialties;
         private IAppointmentRepository? _appointments;
         private IGenericRepository<PatientComplaint>? _patientComplaints;
         private IPatientRepository? _patients;
@@ -24,9 +24,9 @@ namespace Hospital.Infrastructure.UOW
         
         public IUserRepository Users => _users ??= new UserRepository(_context);
         public IAppointmentRepository Appointments => _appointments ??= new AppointmentRepository(_context);
+        public ISpecialtyRepository Specialties => _specialties ??= new SpecialtyRepository(_context);
+        public IDoctorRepository Doctors => _doctors ??= new DoctorRepository(_context);
         
-        public IGenericRepository<Doctor> Doctors => _doctors ??= new GenericRepository<Doctor>(_context);
-        public IGenericRepository<Specialty> Specialties => _specialties ??= new GenericRepository<Specialty>(_context);
         public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
         
         public IPatientRepository Patients => _patients ??= new PatientRepository(_context);
