@@ -99,56 +99,79 @@ namespace Hospital.Application.Services
              _unitOfWork.Appointments.Update(appointment);
              await _unitOfWork.CompleteAsync();
         }
+        
+        private void ValidatePatientInternal(Patient dbPatient, string inputTckn, DateTime inputDob, string inputPhone)
+        {
+            if (dbPatient.TcKimlikNo != inputTckn ||
+                dbPatient.DateOfBirth.Date != inputDob.Date ||
+                dbPatient.PhoneNumber != inputPhone)
+            {
+                throw new Exception("Kimlik bilgileri doğrulanamadı. Lütfen bilgilerinizi kontrol ediniz.");
+            }
+        }
 
         public async Task CreatePublicAsync(CreateAppointmentPublicDto input)
         {
-
             var isDoctorAvailable = await _unitOfWork.Appointments
                 .IsDoctorAvailableAsync(input.DoctorId, input.AppointmentDate);
+            if (!isDoctorAvailable) throw new Exception("Seçilen tarih ve saatte doktor müsait değil.");
 
-            if (!isDoctorAvailable)
+            Patient patient = await _unitOfWork.Patients.GetByTcKimlikNoAsync(input.TcKimlikNo);
+
+            if (patient != null)
             {
-                throw new Exception("Seçilen tarih ve saatte doktor müsait değil.");
-            }
-
-
-            Patient patient;
-
-            // DİKKAT: Burası çalışmayacak çünkü IUnitOfWork içinde henüz
-            // 'Patients' adında özel bir repository ve 'GetByTcKimlikNoAsync' metodu yok.
-            // Bir sonraki adımda Infrastructure katmanında bunu ekleyeceğiz.
-            // Şimdilik mantığı kuralım.
-            /*
-            patient = await _unitOfWork.Patients.GetByTcKimlikNoAsync(input.TcKimlikNo);
-
-            if (patient == null)
-            {
-                // Hasta yoksa, formdan gelen bilgilerle yeni bir hasta entity'si oluştur.
-                // AutoMapper burada devreye giriyor.
-                patient = _mapper.Map<Patient>(input);
-
-                // Yeni hastayı veritabanına ekle.
-                await _unitOfWork.Patients.AddAsync(patient);
+                ValidatePatientInternal(patient, input.TcKimlikNo, input.DateOfBirth, input.PhoneNumber);
                 
-                // Değişiklikleri kaydet ki hastanın yeni ID'si oluşsun.
-                await _unitOfWork.CompleteAsync();
+
             }
-            */
-            // GEÇİCİ KOD (Altyapı hazır olana kadar derleme hatası vermemesi için):
-            throw new NotImplementedException("Altyapı katmanında (Repository) TCKN ile hasta arama metodu henüz hazırlanmadı.");
+            else
+            {
+                patient = _mapper.Map<Patient>(input);
+                await _unitOfWork.Patients.AddAsync(patient);
+                await _unitOfWork.CompleteAsync(); 
+            }
 
-
-            // 3. Randevu Oluşturma
-            // DTO'dan Appointment entity'sine dönüşüm yap.
             var appointment = _mapper.Map<Appointment>(input);
-
-            // Bulunan veya yeni oluşturulan hastanın ID'sini ata.
-            // appointment.PatientId = patient.Id; // Altyapı hazır olunca açılacak
-
-            // Randevuyu kaydet
+            appointment.PatientId = patient.Id; // Hastayı ata
             await _unitOfWork.Appointments.AddAsync(appointment);
             await _unitOfWork.CompleteAsync();
         }
+        public async Task<List<AppointmentListDto>> SearchPublicAsync(ValidatePatientDto input)
+        {
+            var patient = await _unitOfWork.Patients.GetByTcKimlikNoAsync(input.TcKimlikNo);
+            if (patient == null)
+            {
+                throw new Exception("Kimlik bilgileri doğrulanamadı. Lütfen bilgilerinizi kontrol ediniz.");
+            }
+
+            ValidatePatientInternal(patient, input.TcKimlikNo, input.DateOfBirth, input.PhoneNumber);
+
+            var appointments = await _unitOfWork.Appointments.GetAllByPatientIdAsync(patient.Id);
+            return _mapper.Map<List<AppointmentListDto>>(appointments);
+        }
+        
+        public async Task CancelPublicAsync(CancelAppointmentPublicDto input)
+        {
+            var appointment = await _unitOfWork.Appointments.GetByIdAsync(input.AppointmentId);
+            if (appointment == null) throw new Exception("Randevu bulunamadı.");
+            if (appointment.Status == AppointmentStatus.Cancelled) throw new Exception("Randevu zaten iptal edilmiş.");
+            if (appointment.AppointmentDate < DateTime.Now) throw new Exception("Geçmiş randevular iptal edilemez.");
+
+            var patient = await _unitOfWork.Patients.GetByIdAsync(appointment.PatientId);
+            if (patient == null) throw new Exception("Hasta kaydı bulunamadı.");
+
+            ValidatePatientInternal(patient, input.TcKimlikNo, input.DateOfBirth, input.PhoneNumber);
+
+            appointment.Status = AppointmentStatus.Cancelled;
+            if (!string.IsNullOrEmpty(input.CancellationReason))
+            {
+                appointment.Notes = (appointment.Notes ?? "") + $" [İPTAL: {input.CancellationReason}]";
+            }
+            _unitOfWork.Appointments.Update(appointment);
+            await _unitOfWork.CompleteAsync();
+        }
+    
+
 
         public async Task<List<AppointmentListDto>> SearchAppointmentsAsync(int? doctorId, int? patientId, DateTime? startDate, DateTime? endDate)
         {
