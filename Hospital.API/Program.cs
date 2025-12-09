@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
-using AutoMapper;
 using Hospital.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,14 +45,14 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// --- KATMANLARIN SERV�S KAYITLARI ---
-// Infrastructure katman�ndaki servisleri (DbContext vb.) ekle.
+
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-// Application katman�ndaki servisleri (AuthAppService vb.) ekle.
 builder.Services.AddApplicationServices();
-builder.Services.AddAutoMapper(cfg => {}, typeof(Program).Assembly);
-
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<MappingProfile>(); 
+});
 
 // --- JWT K�ML�K DO�RULAMA KONF�G�RASYONU ---
 var tokenKey = builder.Configuration.GetValue<string>("AppSettings:Token");

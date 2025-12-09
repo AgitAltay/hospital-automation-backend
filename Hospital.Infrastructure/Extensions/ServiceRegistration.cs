@@ -15,6 +15,8 @@ namespace Hospital.Infrastructure.Extensions
     {
         public static void AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+            AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
@@ -30,6 +32,8 @@ namespace Hospital.Infrastructure.Extensions
             services.AddScoped<ISpecialtyService, SpecialtyService>();
 
             services.AddScoped<IAppointmentService, AppointmentService>();
+            
+            services.AddScoped<IPatientRepository, PatientRepository>();
         }
     }
 }

@@ -8,6 +8,8 @@ namespace Hospital.Application.Interfaces
         Task CreateAsync(CreateAppointmentDto createDto);
         Task UpdateAsync(UpdateAppointmentDto updateDto);
         Task CreatePublicAsync(CreateAppointmentPublicDto input);
+        Task CancelPublicAsync(CancelAppointmentPublicDto input);
+        Task<List<AppointmentListDto>> SearchPublicAsync(ValidatePatientDto input);
 
         Task CancelAppointmentAsync(int appointmentId, string cancellationReason);
         Task<AppointmentListDto> GetByIdAsync(int appointmentId);

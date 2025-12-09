@@ -9,6 +9,7 @@ namespace Hospital.Application.Extensions
         public static void AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IAuthAppService, AuthAppService>();
+            
         }
     }
 }
