@@ -35,8 +35,7 @@ public class AIService : IAIService
         }
         catch (Exception e)
         {
-            Console.WriteLine(e + "Predict Yapılamadı");
-            throw;
+            throw new Exception("Predict başarısız: ", e);
         }
     }
 }
