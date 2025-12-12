@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Hospital.Application.Interfaces; 
-using Hospital.Application.Services; 
+using Hospital.Application.Services;
+using LoggerManager.Interface;
 
 namespace Hospital.Infrastructure.Extensions
 {
@@ -34,6 +35,8 @@ namespace Hospital.Infrastructure.Extensions
             services.AddScoped<IAppointmentService, AppointmentService>();
             
             services.AddScoped<IPatientRepository, PatientRepository>();
+            
+            services.AddSingleton<ILoggerManager, LoggerManager.LoggerManager>();
         }
     }
 }
