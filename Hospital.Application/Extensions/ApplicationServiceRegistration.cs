@@ -13,6 +13,7 @@ namespace Hospital.Application.Extensions
             services.AddScoped<IDoctorService, DoctorService>();
             services.AddScoped<ISpecialtyService, SpecialtyService>();  
             services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             
             
             

@@ -18,7 +18,7 @@ namespace Hospital.Infrastructure.Data
         public DbSet<Specialty> Specialties { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PatientComplaint> PatientComplaints { get; set; }
-
+        public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -48,6 +48,16 @@ namespace Hospital.Infrastructure.Data
                 entity.Property(p => p.FirstName).IsRequired().HasMaxLength(50);
                 entity.Property(p => p.LastName).IsRequired().HasMaxLength(50);
                 entity.Property(p => p.PhoneNumber).IsRequired().HasMaxLength(20);
+            });
+            modelBuilder.Entity<DoctorSchedule>(entity =>
+            {
+                entity.HasOne(ds => ds.Doctor)
+                    .WithMany() 
+                    .HasForeignKey(ds => ds.DoctorId)
+                    .OnDelete(DeleteBehavior.Cascade); 
+
+                entity.Property(ds => ds.StartTime).IsRequired();
+                entity.Property(ds => ds.EndTime).IsRequired();
             });
 
        
@@ -86,6 +96,7 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<Appointment>().HasQueryFilter(a => !a.IsDeleted);
             modelBuilder.Entity<PatientComplaint>().HasQueryFilter(pc => !pc.IsDeleted);
             modelBuilder.Entity<Patient>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<DoctorSchedule>().HasQueryFilter(ds => !ds.IsDeleted);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

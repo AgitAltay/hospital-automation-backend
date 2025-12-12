@@ -33,6 +33,7 @@ namespace Hospital.Infrastructure.Extensions
             services.AddScoped<IPatientRepository, PatientRepository>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         }
     }
 }

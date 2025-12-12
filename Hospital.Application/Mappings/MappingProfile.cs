@@ -3,6 +3,7 @@ using Hospital.Domain.Entities;
 using Hospital.Application.DTOs.AppointmentDTOs;
 using Hospital.Application.DTOs.SpecialtyDTOs;
 using Hospital.Application.DTOs.DoctorDTOs;
+using Hospital.Application.DTOs.ScheduleDTOs;
 using Hospital.Domain.Enums;
 
 namespace Hospital.Application.Mappings
@@ -53,6 +54,12 @@ namespace Hospital.Application.Mappings
 
             
             CreateMap<UpdateDoctorDto, Doctor>();
-        }
+            CreateMap<CreateScheduleDto, DoctorSchedule>();
+            CreateMap<UpdateScheduleDto, DoctorSchedule>();
+            
+            CreateMap<DoctorSchedule, ScheduleDto>()
+                .ForMember(dest => dest.DayOfWeek, opt => opt.MapFrom(src => src.DayOfWeek.ToString()))
+                .ForMember(dest => dest.StartTime, opt => opt.MapFrom(src => src.StartTime.ToString(@"hh\:mm")))
+                .ForMember(dest => dest.EndTime, opt => opt.MapFrom(src => src.EndTime.ToString(@"hh\:mm")));        }
     }
 }
