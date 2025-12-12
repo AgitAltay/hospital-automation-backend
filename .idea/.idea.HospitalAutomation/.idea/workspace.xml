@@ -9,29 +9,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b5815bc-7116-430b-b47a-221ae6b1b79d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Hospital.API/Controllers/DoctorController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/CreateDoctorDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/DoctorDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/UpdateDoctorDto.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Application/Interfaces/IDoctorService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Application/Services/DoctorService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Domain/Interfaces/IDoctorRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Domain/Interfaces/ISpecialtyRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Repositories/DoctorRepository.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Repositories/SpecialtyRepository.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Extensions/ApplicationServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Extensions/ApplicationServiceRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Interfaces/ISpecialtyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Interfaces/ISpecialtyService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Services/SpecialtyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Services/SpecialtyService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Domain/Entities/Doctor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Domain/Entities/Doctor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Domain/Entities/Specialty.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Domain/Entities/Specialty.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Domain/Interfaces/IUnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Domain/Interfaces/IUnitOfWork.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/Data/ApplicationDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Data/ApplicationDbContext.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/Data/Migrations/ApplicationDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Data/Migrations/ApplicationDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIService/AIService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/AIService/AIService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIService/AIService.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/AIService/AIService.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.API/Hospital.API.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Hospital.API.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.API/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Application/Hospital.Application.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Hospital.Application.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Domain/Hospital.Domain.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Domain/Hospital.Domain.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/Extensions/ServiceRegistration.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Extensions/ServiceRegistration.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/UOW/UnitOfWork.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/UOW/UnitOfWork.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/Hospital.Infrastructure.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Hospital.Infrastructure.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoggerManager/LoggerManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/LoggerManager/LoggerManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LoggerManager/LoggerManager.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/LoggerManager/LoggerManager.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,20 +30,30 @@
     <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;mrkad61&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AgitAltay/hospital-automation-backend.git&quot;,
+    &quot;accountId&quot;: &quot;1c17be6f-595e-4105-99ff-449f56b2363e&quot;
+  }
+}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Hospital.API/Controllers/DoctorController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/CreateDoctorDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/DoctorDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/UpdateDoctorDto.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Application/Interfaces/IDoctorService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Application/Services/DoctorService.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Domain/Interfaces/IDoctorRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Domain/Interfaces/ISpecialtyRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Infrastructure/Repositories/DoctorRepository.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Hospital.Infrastructure/Repositories/SpecialtyRepository.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/484917e236e092d5ce76c5f373993d21fb07a86c2912aaaec5db139b77ac48/SwaggerGenServiceCollectionExtensions.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/asdha/OneDrive/Documents/GitHub/hospital-automation-backend/hospital-automation-backend/AIService/AIService.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 2
@@ -68,24 +66,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.Hospital.API: http.executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "feature/specialty-doctor-system",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Hospital.API: http.executor&quot;: &quot;Debug&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/AiService&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }]]></component>
   <component name="RunManager" selected=".NET Launch Settings Profile.Hospital.API: http">
@@ -130,12 +128,16 @@
       <workItem from="1765191657177" duration="2192000" />
       <workItem from="1765195166670" duration="147000" />
       <workItem from="1765282979738" duration="1676000" />
+      <workItem from="1765454020683" duration="781000" />
+      <workItem from="1765546680182" duration="758000" />
+      <workItem from="1765548067636" duration="917000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
