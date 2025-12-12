@@ -29,14 +29,13 @@ namespace Hospital.Infrastructure.Extensions
             services.AddScoped<IAuthService, AuthService>();
 
             services.AddScoped<IUserRepository, UserRepository>();
-
-            services.AddScoped<ISpecialtyService, SpecialtyService>();
-
-            services.AddScoped<IAppointmentService, AppointmentService>();
+            services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             
             services.AddScoped<IPatientRepository, PatientRepository>();
             
             services.AddSingleton<ILoggerManager, LoggerManager.LoggerManager>();
+            services.AddScoped<IDoctorRepository, DoctorRepository>();
+            services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
         }
     }
 }
