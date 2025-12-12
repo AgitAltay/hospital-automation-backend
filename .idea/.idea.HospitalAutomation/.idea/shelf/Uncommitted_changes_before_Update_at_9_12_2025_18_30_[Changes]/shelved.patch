@@ -1,0 +1,61 @@
+Index: .idea/.idea.HospitalAutomation/.idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.HospitalAutomation/.idea/.gitignore b/.idea/.idea.HospitalAutomation/.idea/.gitignore
+new file mode 100644
+--- /dev/null	(date 1765294024869)
++++ b/.idea/.idea.HospitalAutomation/.idea/.gitignore	(date 1765294024869)
+@@ -0,0 +1,15 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Rider ignored files
++/modules.xml
++/contentModel.xml
++/projectSettingsUpdater.xml
++/.idea.HospitalAutomation.iml
++# Ignored default folder with query files
++/queries/
++# Datasource local storage ignored files
++/dataSources/
++/dataSources.local.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+Index: .idea/.idea.HospitalAutomation/.idea/indexLayout.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.HospitalAutomation/.idea/indexLayout.xml b/.idea/.idea.HospitalAutomation/.idea/indexLayout.xml
+new file mode 100644
+--- /dev/null	(date 1765294090631)
++++ b/.idea/.idea.HospitalAutomation/.idea/indexLayout.xml	(date 1765294090631)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="UserContentModel">
++    <attachedFolders />
++    <explicitIncludes />
++    <explicitExcludes />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.idea.HospitalAutomation/.idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.HospitalAutomation/.idea/vcs.xml b/.idea/.idea.HospitalAutomation/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1765294225741)
++++ b/.idea/.idea.HospitalAutomation/.idea/vcs.xml	(date 1765294225741)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file

@@ -16,6 +16,8 @@ namespace Hospital.Infrastructure.UOW
         private IAppointmentRepository? _appointments;
         private IGenericRepository<PatientComplaint>? _patientComplaints;
         private IPatientRepository? _patients;
+        private IDoctorScheduleRepository? _doctorSchedules;
+        
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -30,6 +32,7 @@ namespace Hospital.Infrastructure.UOW
         public IGenericRepository<PatientComplaint> PatientComplaints => _patientComplaints ??= new GenericRepository<PatientComplaint>(_context);
         
         public IPatientRepository Patients => _patients ??= new PatientRepository(_context);
+        public IDoctorScheduleRepository DoctorSchedules => _doctorSchedules ??= new DoctorScheduleRepository(_context);        
 
         public async Task<int> CompleteAsync()
         {

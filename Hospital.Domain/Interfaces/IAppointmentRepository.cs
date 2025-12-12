@@ -17,5 +17,7 @@ public interface IAppointmentRepository :  IGenericRepository<Appointment>
     Task<int> GetPatientActiveAppointmentCountAsync(int patientId);
     Task<List<Appointment>> GetByFilterAsync(int? doctorId, int? patientId, DateTime? startDate, DateTime? endDate);
     Task<List<Appointment>> GetDailyAppointmentsByDepartmentAsync(int departmentId, DateTime date);
+    Task<List<Appointment>> GetAppointmentsByDoctorIdAsync(int doctorId);
+    Task<List<Appointment>> GetAppointmentsByDateAsync(int doctorId, DateTime date);
     
 }

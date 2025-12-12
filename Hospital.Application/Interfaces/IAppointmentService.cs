@@ -16,5 +16,7 @@ namespace Hospital.Application.Interfaces
         Task<List<AppointmentListDto>> GetAllByPatientIdAsync(int patientId);
         Task<List<AppointmentListDto>> GetAllByDoctorIdAsync(int doctorId, DateTime date);
         Task<List<AppointmentListDto>> SearchAppointmentsAsync(int? doctorId, int? patientId, DateTime? startDate, DateTime? endDate);
+        Task<List<AppointmentListDto>> GetDoctorAppointmentsAsync(int doctorId);
+        Task<List<string>> GetAvailableSlotsAsync(int doctorId, DateTime date);
     }
 }

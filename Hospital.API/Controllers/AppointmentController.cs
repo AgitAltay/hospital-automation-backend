@@ -185,5 +185,50 @@ namespace Hospital.API.Controllers
             var appointments = await _appointmentService.SearchAppointmentsAsync(doctorId, patientId, startDate, endDate);
             return Ok(appointments);
         }
+        
+        [HttpGet("my-appointments")]
+        [Authorize(Roles = "Doctor")] 
+        public async Task<IActionResult> GetMyAppointments()
+        {
+            try
+            {
+                var doctorIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+
+                if (doctorIdClaim == null)
+                {
+                    return Unauthorized(new { Message = "Kimlik bilgisi doğrulanamadı." });
+                }
+
+                int doctorId = int.Parse(doctorIdClaim.Value);
+
+                var result = await _appointmentService.GetDoctorAppointmentsAsync(doctorId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+        
+        [HttpGet("available-slots")]
+        [AllowAnonymous] 
+        public async Task<IActionResult> GetAvailableSlots(int doctorId, DateTime date)
+        {
+            try
+            {
+                if (date.Date < DateTime.Today)
+                {
+                    return BadRequest(new { Message = "Geçmiş bir tarih için randevu sorgulanamaz." });
+                }
+
+                var slots = await _appointmentService.GetAvailableSlotsAsync(doctorId, date);
+                return Ok(slots);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
     }
 }

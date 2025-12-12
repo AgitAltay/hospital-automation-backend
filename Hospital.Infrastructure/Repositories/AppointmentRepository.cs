@@ -137,4 +137,20 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
             .OrderBy(a => a.AppointmentDate)
             .ToListAsync();
     }
+    public async Task<List<Appointment>> GetAppointmentsByDoctorIdAsync(int doctorId)
+    {
+        return await _context.Appointments
+            .Include(a => a.Patient) 
+            .Where(a => a.DoctorId == doctorId && !a.IsDeleted)
+            .OrderByDescending(a => a.AppointmentDate) 
+            .ToListAsync();
+    }
+    public async Task<List<Appointment>> GetAppointmentsByDateAsync(int doctorId, DateTime date)
+    {
+        return await _context.Appointments
+            .Where(a => a.DoctorId == doctorId 
+                        && !a.IsDeleted 
+                        && a.AppointmentDate.Date == date.Date) 
+            .ToListAsync();
+    }
 }

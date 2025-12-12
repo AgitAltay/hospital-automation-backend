@@ -178,5 +178,52 @@ namespace Hospital.Application.Services
             var result = await _unitOfWork.Appointments.GetByFilterAsync(doctorId, patientId, startDate, endDate);
             return _mapper.Map<List<AppointmentListDto>>(result);
         }
+        public async Task<List<AppointmentListDto>> GetDoctorAppointmentsAsync(int doctorId)
+        {
+            var appointments = await _unitOfWork.Appointments.GetAppointmentsByDoctorIdAsync(doctorId);
+            
+            return _mapper.Map<List<AppointmentListDto>>(appointments);
+        }
+        public async Task<List<string>> GetAvailableSlotsAsync(int doctorId, DateTime date)
+{
+ 
+    var schedule = await _unitOfWork.DoctorSchedules
+        .GetScheduleByDoctorAndDayAsync(doctorId, date.DayOfWeek);
+
+    if (schedule == null || !schedule.IsAvailable)
+    {
+        return new List<string>(); 
+    }
+
+    var existingAppointments = await _unitOfWork.Appointments
+        .GetAppointmentsByDateAsync(doctorId, date);
+        
+    var bookedSlots = existingAppointments
+        .Select(a => a.AppointmentDate.ToString("HH:mm"))
+        .ToHashSet();
+
+    var availableSlots = new List<string>();
+    
+    TimeSpan currentSlot = schedule.StartTime;
+
+    TimeSpan interval = TimeSpan.FromMinutes(15);
+
+    while (currentSlot < schedule.EndTime)
+    {
+        string slotString = currentSlot.ToString(@"hh\:mm");
+
+        if (!bookedSlots.Contains(slotString))
+        {
+            if (date.Date > DateTime.Today || (date.Date == DateTime.Today && currentSlot > DateTime.Now.TimeOfDay))
+            {
+                 availableSlots.Add(slotString);
+            }
+        }
+
+        currentSlot = currentSlot.Add(interval);
+    }
+
+    return availableSlots;
+}
     }
 }

@@ -36,6 +36,7 @@ namespace Hospital.Infrastructure.Extensions
             services.AddSingleton<ILoggerManager, LoggerManager.LoggerManager>();
             services.AddScoped<IDoctorRepository, DoctorRepository>();
             services.AddScoped<ISpecialtyRepository, SpecialtyRepository>();
+            services.AddScoped<IDoctorScheduleRepository, DoctorScheduleRepository>();
         }
     }
 }

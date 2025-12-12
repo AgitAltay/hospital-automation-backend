@@ -13,7 +13,9 @@ namespace Hospital.Domain.Interfaces
 
         IPatientRepository Patients { get; }
         IGenericRepository<PatientComplaint> PatientComplaints { get; }
+        IDoctorScheduleRepository DoctorSchedules { get; }
 
         Task<int> CompleteAsync();
+        
     }
 }
