@@ -35,6 +35,9 @@ namespace Hospital.Application.DTOs.AppointmentDTOs
 
         [Required(ErrorMessage = "Doktor seçimi zorunludur.")]
         public int DoctorId { get; set; }
+        
+        [Required(ErrorMessage = "Cinsiyet seçimi zorunludur.")]
+        public int Gender { get; set; }
 
         [Required(ErrorMessage = "Randevu tarihi zorunludur.")]
         [FutureDate(ErrorMessage = "Geçmiş bir tarihe randevu alamazsınız.")]
@@ -43,5 +46,6 @@ namespace Hospital.Application.DTOs.AppointmentDTOs
 
         [MaxLength(500)]
         public string? Note { get; set; }
+        
     }
 }

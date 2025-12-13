@@ -18,6 +18,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var specialties = await _specialtyService.GetAllAsync();
@@ -39,7 +40,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")] // İleride eklenecek
+        [Authorize(Roles = "Admin")] // İleride eklenecek
         public async Task<IActionResult> Create([FromBody] CreateSpecialtyDto createDto)
         {
             try

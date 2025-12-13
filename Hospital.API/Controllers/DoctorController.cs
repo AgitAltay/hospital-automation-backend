@@ -39,6 +39,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpGet("specialty/{specialtyId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetBySpecialty(int specialtyId)
         {
             try
@@ -53,7 +54,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPost]
-        // [Authorize(Roles = "Admin")] // Mutlaka eklenmeli ileride
+        [Authorize(Roles = "Admin")] // Mutlaka eklenmeli ileride
         public async Task<IActionResult> Create([FromBody] CreateDoctorDto createDto)
         {
             try
@@ -71,7 +72,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPut]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UpdateDoctorDto updateDto)
         {
             try
@@ -87,8 +88,8 @@ namespace Hospital.API.Controllers
             }
         }
 
-        [HttpDelete("{id}")]
-        // [Authorize(Roles = "Admin")]
+        [HttpDelete("{id}")] 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
