@@ -3,6 +3,7 @@ using Hospital.Application.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using LoggerManager.Interface;
 
 namespace Hospital.API.Controllers
 {
@@ -12,13 +13,14 @@ namespace Hospital.API.Controllers
     public class AppointmentController : ControllerBase
     {
         private readonly IAppointmentService _appointmentService;
+        private readonly ILoggerManager _logger;
 
-        public AppointmentController(IAppointmentService appointmentService)
+        public AppointmentController(IAppointmentService appointmentService, ILoggerManager logger)
         {
+            _logger = logger;
             _appointmentService = appointmentService;
         }
-
-    
+        
     
         [HttpPost("public/create")]
         [AllowAnonymous] 
