@@ -79,7 +79,15 @@ namespace Hospital.Application.Services.Implementations
             return new AuthResponseDto
             {
                 Success = true,
-                Data = token
+                Data = new
+                {
+                    Token = token,
+                    Expiration = DateTime.Now.AddDays(7),
+                    Role = user.Role.ToString(),
+                    UserId = user.Id,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                }
             };
         }
     }
