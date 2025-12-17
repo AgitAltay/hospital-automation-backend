@@ -9,10 +9,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b5815bc-7116-430b-b47a-221ae6b1b79d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/shelf/Uncommitted_changes_before_Update_at_9_12_2025_16_14_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/shelf/Uncommitted_changes_before_Update_at_9_12_2025_16_14__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.API/Controllers/DoctorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Controllers/DoctorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/CreateAppointmentPublicDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/CreateAppointmentPublicDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.API/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.API/Properties/launchSettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Properties/launchSettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/AppointmentListDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/AppointmentListDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/UpdateAppointmentDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/UpdateAppointmentDTO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.Infrastructure/Repositories/AppointmentRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Infrastructure/Repositories/AppointmentRepository.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,7 +151,11 @@
       <workItem from="1765294432493" duration="615000" />
       <workItem from="1765458246405" duration="2631000" />
       <workItem from="1765546962313" duration="5941000" />
-      <workItem from="1765630162320" duration="3800000" />
+      <workItem from="1765630162320" duration="4970000" />
+      <workItem from="1765641971514" duration="1238000" />
+      <workItem from="1765708830756" duration="7736000" />
+      <workItem from="1765741965385" duration="3711000" />
+      <workItem from="1765973672309" duration="476000" />
     </task>
     <servers />
   </component>

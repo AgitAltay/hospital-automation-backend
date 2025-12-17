@@ -15,8 +15,11 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
     public async Task<List<Appointment>> GetAllByPatientIdAsync(int patientId)
     {
         return await _context.Appointments
-            .Where(a => a.PatientId == patientId)
+            .Where(a => a.PatientId == patientId) 
             .Include(a => a.Patient)
+            .Include(a => a.Doctor)             
+            .ThenInclude(d => d.Specialty)  
+            .OrderByDescending(a => a.AppointmentDate) 
             .ToListAsync();
     }
 
@@ -150,7 +153,8 @@ public class AppointmentRepository : GenericRepository<Appointment>, IAppointmen
         return await _context.Appointments
             .Where(a => a.DoctorId == doctorId 
                         && !a.IsDeleted 
-                        && a.AppointmentDate.Date == date.Date) 
+                        && a.AppointmentDate.Date == date.Date
+                        && a.Status != AppointmentStatus.Cancelled) 
             .ToListAsync();
     }
 }
