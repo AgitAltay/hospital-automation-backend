@@ -8,7 +8,7 @@ namespace Hospital.Application.DTOs.AppointmentDTOs
         public DateTime AppointmentDate { get; set; }
         public AppointmentStatus Status { get; set; }
         
-        
+        public string Notes { get; set; }
         public int PatientId { get; set; }
         public string PatientName { get; set; } = string.Empty;
         

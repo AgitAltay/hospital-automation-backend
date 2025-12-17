@@ -37,8 +37,33 @@ namespace Hospital.API.Controllers
             {
                 return BadRequest(new { Message = ex.Message });
             }
-        }
+        }       
+        
+        [HttpGet("doctor/{id}")]
+        [Authorize(Roles = "Doctor,Admin")] 
+        public async Task<IActionResult> GetAppointmentsByDoctorId(int id, [FromQuery] DateTime? date)
+        {
+            try
+            {
+                var currentUserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
+                var currentUserRole = User.FindFirst(ClaimTypes.Role)?.Value;
 
+                if (currentUserRole == "Doctor" && currentUserId != id)
+                {
+                    return Unauthorized(new { Message = "Sadece kendi randevularınızı görüntüleyebilirsiniz." });
+                }
+                
+                DateTime targetDate = date ?? DateTime.Today;
+
+                var appointments = await _appointmentService.GetAllByDoctorIdAsync(id, targetDate);
+                
+                return Ok(appointments);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
   
         [HttpPost("public/search")]
         [AllowAnonymous]

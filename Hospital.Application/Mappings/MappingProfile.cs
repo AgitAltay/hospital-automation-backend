@@ -29,6 +29,7 @@ namespace Hospital.Application.Mappings
             CreateMap<ValidatePatientDto, Patient>();
 
             CreateMap<Appointment, AppointmentListDto>()
+                .ForMember(dest => dest.Notes, opt => opt.MapFrom(src => src.Notes))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status)) 
                 .ForMember(dest => dest.AppointmentId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Doctor != null ? $"{src.Doctor.FirstName} {src.Doctor.LastName}" : ""))

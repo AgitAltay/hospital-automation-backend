@@ -80,24 +80,25 @@ namespace Hospital.Application.Services
 
         public async Task UpdateAsync(UpdateAppointmentDto updateDto)
         {
-             var appointment = await _unitOfWork.Appointments.GetByIdAsync(updateDto.AppointmentId);
-             if (appointment == null) throw new Exception("Randevu bulunamadı");
+            var appointment = await _unitOfWork.Appointments.GetByIdAsync(updateDto.AppointmentId);
+            if (appointment == null) throw new Exception("Randevu bulunamadı");
 
-             if(updateDto.NewDate.HasValue && updateDto.NewDate != appointment.AppointmentDate)
-             {
-                 bool isAvailable = await _unitOfWork.Appointments
-                     .IsDoctorAvailableAsync(appointment.DoctorId, updateDto.NewDate.Value);
-                 
-                 if(!isAvailable) throw new Exception("Yeni tarih için doktor müsait değil.");
-                 
-                 appointment.AppointmentDate = updateDto.NewDate.Value;
-             }
-             
-             appointment.Status = updateDto.Status;
-             if(!string.IsNullOrEmpty(updateDto.Note)) appointment.Notes = updateDto.Note;
+            if(updateDto.NewDate.HasValue && updateDto.NewDate != appointment.AppointmentDate)
+            {
+                bool isAvailable = await _unitOfWork.Appointments
+                    .IsDoctorAvailableAsync(appointment.DoctorId, updateDto.NewDate.Value);
+         
+                if(!isAvailable) throw new Exception("Yeni tarih için doktor müsait değil.");
+         
+                appointment.AppointmentDate = updateDto.NewDate.Value;
+            }
+            
+            appointment.Status = updateDto.Status; 
 
-             _unitOfWork.Appointments.Update(appointment);
-             await _unitOfWork.CompleteAsync();
+            if(!string.IsNullOrEmpty(updateDto.Note)) appointment.Notes = updateDto.Note;
+
+            _unitOfWork.Appointments.Update(appointment);
+            await _unitOfWork.CompleteAsync();
         }
         
         private void ValidatePatientInternal(Patient dbPatient, string inputTckn, DateTime inputDob, string inputPhone)
