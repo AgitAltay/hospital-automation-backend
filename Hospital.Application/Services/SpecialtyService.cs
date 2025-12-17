@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Hospital.Application.Services.Implementations
+namespace Hospital.Application.Services
 {
     public class SpecialtyService : ISpecialtyService
     {
