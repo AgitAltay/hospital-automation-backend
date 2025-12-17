@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AIService;
 using AIService.Interface;
+using LoggerManager.Interface;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Hospital.API.Controllers;
@@ -9,10 +10,12 @@ namespace Hospital.API.Controllers;
 [ApiController]
 public class AıPredictController : ControllerBase
 {
-    public readonly IAIService _aiService;
+    private readonly IAIService _aiService;
+    private readonly ILoggerManager _logger;
 
-    public AıPredictController(IAIService aiService)
+    public AıPredictController(IAIService aiService, ILoggerManager logger)
     {
+        _logger = logger;
         _aiService = aiService;
     }
 
@@ -23,12 +26,14 @@ public class AıPredictController : ControllerBase
         try
         {
             var response = await _aiService.Predict(complaintText);
-            return (Ok(response.Label + "   -----  " + response.Score));
+            var result = response.Label + "-------" +  response.Score;
+            _logger.LogInfo(result + "Predict Başarılı.");
+            return Ok(result);
         }
         catch (Exception e)
         {
-            Console.WriteLine(e + "Predict Başarısız");
-            throw;
+            _logger.LogError(e.Message + "Predict Başarısız.");
+            return BadRequest();
         }
     }
 }

@@ -59,7 +59,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-builder.Services.AddScoped<IAIService,  AIService.AIService>();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
 builder.Services.AddApplicationServices();
@@ -99,6 +98,12 @@ if (app.Environment.IsDevelopment())
 }
 app.UseCors("AllowAll");
 //app.UseHttpsRedirection();
+
+// Enable CORS
+app.UseCors(x => x
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 // --- M�DDLEWARE SIRASI �NEML�D�R ---
 app.UseAuthentication(); // Kimlik Do�rulama
