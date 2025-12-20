@@ -9,11 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b5815bc-7116-430b-b47a-221ae6b1b79d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.API/Controllers/AppointmentController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Controllers/AppointmentController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/AppointmentListDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/DTOs/AppointmentDTOs/AppointmentListDTO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Mappings/MappingProfile.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Services/AppointmentService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Services/AppointmentService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.API/Controllers/SpecialtyController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,6 +150,9 @@
       <workItem from="1765708830756" duration="7736000" />
       <workItem from="1765741965385" duration="3711000" />
       <workItem from="1765973672309" duration="476000" />
+      <workItem from="1766144918105" duration="2634000" />
+      <workItem from="1766150147407" duration="169000" />
+      <workItem from="1766150621795" duration="3593000" />
     </task>
     <servers />
   </component>

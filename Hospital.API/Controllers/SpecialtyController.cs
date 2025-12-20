@@ -57,6 +57,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpPut]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update([FromBody] UpdateSpecialtyDto updateDto)
         {
             try
@@ -73,6 +74,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int id)
         {
             try
