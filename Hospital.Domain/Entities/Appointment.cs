@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Hospital.Domain.Enums;
 
 namespace Hospital.Domain.Entities
@@ -15,5 +15,11 @@ namespace Hospital.Domain.Entities
         public DateTime AppointmentDate { get; set; }
         public AppointmentStatus Status { get; set; }
         public string? Notes { get; set; }
+
+        // AI tarafindan yonlendirilen randevu mu?
+        public bool IsAIGenerated { get; set; } = false;
+
+        // Eger AI tarafindan yonlendirildiyse, hastanin asil sikayet metni
+        public string? PatientComplaintSummary { get; set; }
     }
 }

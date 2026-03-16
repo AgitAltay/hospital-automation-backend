@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using Hospital.Application.Attributes; 
 
 
@@ -46,6 +46,11 @@ namespace Hospital.Application.DTOs.AppointmentDTOs
 
         [MaxLength(500)]
         public string? Note { get; set; }
+        
+        public bool IsAIGenerated { get; set; } = false;
+        
+        [MaxLength(1000)]
+        public string? PatientComplaintSummary { get; set; }
         
     }
 }

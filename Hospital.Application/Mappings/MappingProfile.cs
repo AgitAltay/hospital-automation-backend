@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Hospital.Domain.Entities;
 using Hospital.Application.DTOs.AppointmentDTOs;
 using Hospital.Application.DTOs.SpecialtyDTOs;
@@ -24,7 +24,9 @@ namespace Hospital.Application.Mappings
 
             CreateMap<CreateAppointmentPublicDto, Appointment>()
                 .ForMember(dest => dest.Notes, opt => opt.MapFrom(src => src.Note))
-                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => AppointmentStatus.Active));
+                .ForMember(dest => dest.Status, opt => opt.MapFrom(src => AppointmentStatus.Active))
+                .ForMember(dest => dest.IsAIGenerated, opt => opt.MapFrom(src => src.IsAIGenerated))
+                .ForMember(dest => dest.PatientComplaintSummary, opt => opt.MapFrom(src => src.PatientComplaintSummary));
 
             CreateMap<ValidatePatientDto, Patient>();
 
@@ -34,9 +36,12 @@ namespace Hospital.Application.Mappings
                 .ForMember(dest => dest.AppointmentId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.DoctorName, opt => opt.MapFrom(src => src.Doctor != null ? $"{src.Doctor.FirstName} {src.Doctor.LastName}" : ""))
                 .ForMember(dest => dest.PatientName, opt => opt.MapFrom(src => src.Patient != null ? $"{src.Patient.FirstName} {src.Patient.LastName}" : ""))
-                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Doctor != null && src.Doctor.Specialty != null ? src.Doctor.Specialty.Name : ""));
+                .ForMember(dest => dest.DepartmentName, opt => opt.MapFrom(src => src.Doctor != null && src.Doctor.Specialty != null ? src.Doctor.Specialty.Name : ""))
+                .ForMember(dest => dest.IsAIGenerated, opt => opt.MapFrom(src => src.IsAIGenerated))
+                .ForMember(dest => dest.PatientComplaintSummary, opt => opt.MapFrom(src => src.PatientComplaintSummary))
+                .ForMember(dest => dest.HasAIFeedback, opt => opt.Ignore()); // Service katmanında manuel set edeceğiz
 
-
+            CreateMap<CreateAIFeedbackDto, AIFeedback>();
   
             CreateMap<Specialty, SpecialtyDto>();
             CreateMap<CreateSpecialtyDto, Specialty>();

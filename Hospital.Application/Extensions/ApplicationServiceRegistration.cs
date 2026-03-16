@@ -1,4 +1,4 @@
-﻿using AIService.Interface;
+using AIService.Interface;
 using Hospital.Application.Interfaces;
 using Hospital.Application.Services;
 using Hospital.Application.Services.Implementations;
@@ -16,8 +16,7 @@ namespace Hospital.Application.Extensions
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
             services.AddScoped<IAIService, AIService.AIService>();
-
-
+            services.AddScoped<IAIFeedbackService, AIFeedbackService>();
         }
     }
 }

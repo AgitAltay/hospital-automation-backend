@@ -1,4 +1,4 @@
-﻿using Hospital.Domain.Entities;
+using Hospital.Domain.Entities;
 using System;
 using System.Threading.Tasks;
 
@@ -14,6 +14,7 @@ namespace Hospital.Domain.Interfaces
         IPatientRepository Patients { get; }
         IGenericRepository<PatientComplaint> PatientComplaints { get; }
         IDoctorScheduleRepository DoctorSchedules { get; }
+        IAIFeedbackRepository AIFeedbacks { get; }
 
         Task<int> CompleteAsync();
         

@@ -1,4 +1,4 @@
-﻿using Hospital.Domain.Enums;
+using Hospital.Domain.Enums;
 
 namespace Hospital.Application.DTOs.AppointmentDTOs
 {
@@ -16,5 +16,9 @@ namespace Hospital.Application.DTOs.AppointmentDTOs
         public string DoctorName { get; set; } = string.Empty;
         
         public string DepartmentName { get; set; } = string.Empty; 
+        
+        public bool IsAIGenerated { get; set; } = false;
+        public string? PatientComplaintSummary { get; set; }
+        public bool HasAIFeedback { get; set; } = false;
     }
 }

@@ -8,7 +8,7 @@ namespace AIService;
 public class AIService : IAIService
 {
     private readonly HttpClient _httpClient;
-    private readonly string _baseUrl = "http://localhost:8002";
+    private readonly string _baseUrl = "http://localhost:8003";
     
     public AIService()
     {

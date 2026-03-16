@@ -18,6 +18,7 @@ namespace Hospital.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             var doctors = await _doctorService.GetAllAsync();

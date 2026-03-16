@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Hospital.Application.DTOs.AppointmentDTOs;
 using Hospital.Application.Interfaces;
 using Hospital.Domain.Entities;
@@ -66,7 +66,17 @@ namespace Hospital.Application.Services
         public async Task<List<AppointmentListDto>> GetAllByDoctorIdAsync(int doctorId, DateTime date)
         {
             var appointments = await _unitOfWork.Appointments.GetDoctorDailyScheduleAsync(doctorId, date);
-            return _mapper.Map<List<AppointmentListDto>>(appointments);
+            var mappedList = _mapper.Map<List<AppointmentListDto>>(appointments);
+            
+            foreach (var dto in mappedList)
+            {
+                if (dto.IsAIGenerated)
+                {
+                    var feedbacks = await _unitOfWork.AIFeedbacks.FindAsync(f => f.AppointmentId == dto.AppointmentId);
+                    dto.HasAIFeedback = feedbacks.Any();
+                }
+            }
+            return mappedList;
         }
 
         public async Task<AppointmentListDto> GetByIdAsync(int appointmentId)
@@ -182,8 +192,17 @@ namespace Hospital.Application.Services
         public async Task<List<AppointmentListDto>> GetDoctorAppointmentsAsync(int doctorId)
         {
             var appointments = await _unitOfWork.Appointments.GetAppointmentsByDoctorIdAsync(doctorId);
+            var mappedList = _mapper.Map<List<AppointmentListDto>>(appointments);
             
-            return _mapper.Map<List<AppointmentListDto>>(appointments);
+            foreach (var dto in mappedList)
+            {
+                if (dto.IsAIGenerated)
+                {
+                    var feedbacks = await _unitOfWork.AIFeedbacks.FindAsync(f => f.AppointmentId == dto.AppointmentId);
+                    dto.HasAIFeedback = feedbacks.Any();
+                }
+            }
+            return mappedList;
         }
         public async Task<List<string>> GetAvailableSlotsAsync(int doctorId, DateTime date)
 {

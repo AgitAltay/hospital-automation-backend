@@ -26,9 +26,9 @@ public class AıPredictController : ControllerBase
         try
         {
             var response = await _aiService.Predict(complaintText);
-            var result = response.Label + "-------" +  response.Score;
-            _logger.LogInfo(result + "Predict Başarılı.");
-            return Ok(result);
+            // var result = response.Label + "-------" +  response.Score;
+            _logger.LogInfo($"Predict Başarılı. Label: {response.Label}, Score: {response.Score}");
+            return Ok(response);
         }
         catch (Exception e)
         {

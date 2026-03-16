@@ -15,4 +15,16 @@ public class PredictionResponse
 
     [JsonPropertyName("score")]
     public float Score { get; set; }
+
+    [JsonPropertyName("predictions")]
+    public List<PredictionDetail> Predictions { get; set; } = new();
+}
+
+public class PredictionDetail
+{
+    [JsonPropertyName("label")]
+    public string Label { get; set; }
+    
+    [JsonPropertyName("score")]
+    public float Score { get; set; }
 }

@@ -1,4 +1,4 @@
-﻿using Hospital.Domain.Entities;
+using Hospital.Domain.Entities;
 using Hospital.Domain.Interfaces;
 using Hospital.Infrastructure.Data;
 using Hospital.Infrastructure.Repositories;
@@ -17,6 +17,7 @@ namespace Hospital.Infrastructure.UOW
         private IGenericRepository<PatientComplaint>? _patientComplaints;
         private IPatientRepository? _patients;
         private IDoctorScheduleRepository? _doctorSchedules;
+        private IAIFeedbackRepository? _aiFeedbacks;
         
 
         public UnitOfWork(ApplicationDbContext context)
@@ -33,6 +34,7 @@ namespace Hospital.Infrastructure.UOW
         
         public IPatientRepository Patients => _patients ??= new PatientRepository(_context);
         public IDoctorScheduleRepository DoctorSchedules => _doctorSchedules ??= new DoctorScheduleRepository(_context);        
+        public IAIFeedbackRepository AIFeedbacks => _aiFeedbacks ??= new AIFeedbackRepository(_context);
 
         public async Task<int> CompleteAsync()
         {

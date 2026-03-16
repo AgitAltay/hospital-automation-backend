@@ -1,4 +1,4 @@
-﻿using Hospital.Domain.Entities;
+using Hospital.Domain.Entities;
 using Hospital.Domain.Enums; 
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,6 +19,7 @@ namespace Hospital.Infrastructure.Data
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<PatientComplaint> PatientComplaints { get; set; }
         public DbSet<DoctorSchedule> DoctorSchedules { get; set; }
+        public DbSet<AIFeedback> AIFeedbacks { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -88,6 +89,19 @@ namespace Hospital.Infrastructure.Data
                 .HasForeignKey(pc => pc.PatientId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            // AIFeedback İlişkileri
+            modelBuilder.Entity<AIFeedback>()
+                .HasOne(f => f.Appointment)
+                .WithMany()
+                .HasForeignKey(f => f.AppointmentId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<AIFeedback>()
+                .HasOne(f => f.Doctor)
+                .WithMany()
+                .HasForeignKey(f => f.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
           
 
            
@@ -97,6 +111,7 @@ namespace Hospital.Infrastructure.Data
             modelBuilder.Entity<PatientComplaint>().HasQueryFilter(pc => !pc.IsDeleted);
             modelBuilder.Entity<Patient>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<DoctorSchedule>().HasQueryFilter(ds => !ds.IsDeleted);
+            modelBuilder.Entity<AIFeedback>().HasQueryFilter(f => !f.IsDeleted);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
