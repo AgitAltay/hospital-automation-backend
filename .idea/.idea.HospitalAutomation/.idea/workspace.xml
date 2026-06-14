@@ -9,9 +9,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9b5815bc-7116-430b-b47a-221ae6b1b79d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources/834b02dc-72ca-4c24-a930-8fb2db360a0e/storage_v2/_src_/database/hospitaldb.OGQgEA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/dataSources/834b02dc-72ca-4c24-a930-8fb2db360a0e/storage_v2/_src_/database/hospitaldb.OGQgEA/schema/public.abK9xQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_12_2025_18_41_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/shelf/Uncommitted_changes_before_Checkout_at_12_12_2025_18_41__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.HospitalAutomation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Class1.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital.Application/Services/SpecialtyService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital.Application/Services/SpecialtyService.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,9 +42,21 @@
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/AgitAltay/hospital-automation-backend.git&quot;,
     &quot;accountId&quot;: &quot;1c17be6f-595e-4105-99ff-449f56b2363e&quot;
+  },
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
+    },
+    &quot;owner&quot;: &quot;AgitAltay&quot;,
+    &quot;repository&quot;: &quot;hospital-automation-backend&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/asdha/OneDrive/Documents/GitHub/hospital/hospital-automation-backend/.idea/.idea.HospitalAutomation/.idea/dataSources/834b02dc-72ca-4c24-a930-8fb2db360a0e/storage_v2/_src_/database/hospitaldb.OGQgEA/schema/public.abK9xQ.meta" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/AIService/AIService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Hospital.API/Controllers/DoctorController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Hospital.API/Controllers/DoctorScheduleController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Hospital.Application/DTOs/DoctorDTOs/CreateDoctorDto.cs" root0="FORCE_HIGHLIGHTING" />
@@ -62,6 +77,13 @@
     <setting file="file://$PROJECT_DIR$/Hospital.Infrastructure/Repositories/DoctorScheduleRepository.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Hospital.Infrastructure/Repositories/SpecialtyRepository.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
+  <component name="HttpClientEndpointsTabState">
+    <option name="cachedRequestData" value="&lt;CachedHttpClientTabRequests&gt;&#10;  &lt;entry key=&quot;d36bfcf08cf873faf69ac80d74c9550da45d69da&quot; value=&quot;###&amp;#10;PUT http://127.0.0.1:5024/api/Appointment&quot; /&gt;&#10;&lt;/CachedHttpClientTabRequests&gt;" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -87,7 +109,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;#17 on derlitoplu&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -129,6 +151,15 @@
         <option name="Build" />
       </method>
     </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -145,7 +176,35 @@
       <workItem from="1765546962313" duration="5941000" />
       <workItem from="1765630162320" duration="3800000" />
       <workItem from="1765639473985" duration="3185000" />
+      <workItem from="1766061590900" duration="79000" />
+      <workItem from="1766080512184" duration="138000" />
+      <workItem from="1766234245904" duration="3350000" />
+      <workItem from="1767356473686" duration="2808000" />
+      <workItem from="1767362863380" duration="1073000" />
+      <workItem from="1767563687019" duration="2618000" />
+      <workItem from="1767598952850" duration="4090000" />
+      <workItem from="1771411442766" duration="264000" />
+      <workItem from="1773639852466" duration="1199000" />
+      <workItem from="1781347939468" duration="4662000" />
+      <workItem from="1781439865982" duration="1445000" />
     </task>
+    <task id="LOCAL-00001" summary="derleme toplama">
+      <option name="closed" value="true" />
+      <created>1765995643448</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1765995643448</updated>
+    </task>
+    <task id="LOCAL-00002" summary="AI yönlendirmesi yapılan randevuların takibi">
+      <option name="closed" value="true" />
+      <created>1773645063075</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773645063075</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +225,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="derleme toplama" />
+    <MESSAGE value="AI yönlendirmesi yapılan randevuların takibi" />
+    <option name="LAST_COMMIT_MESSAGE" value="AI yönlendirmesi yapılan randevuların takibi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
