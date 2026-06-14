@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace AIService.Models;
 
@@ -18,6 +18,9 @@ public class PredictionResponse
 
     [JsonPropertyName("predictions")]
     public List<PredictionDetail> Predictions { get; set; } = new();
+
+    [JsonPropertyName("errorMessage")]
+    public string? ErrorMessage { get; set; }
 }
 
 public class PredictionDetail

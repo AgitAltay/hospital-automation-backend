@@ -1,0 +1,293 @@
+Text,IsMeaningful
+"Başım çok ağrıyor, ne yapmalıyım?",1
+"Karnım ağrıyor dünden beri",1
+"Randevu almak istiyorum, göz doktoruna",1
+"Mide bulantısı ve halsizlik şikayetim var",1
+"Sol kolumda uyuşma ve göğsümde sıkışma var",1
+"Çocuğumun ateşi düşmüyor",1
+"Boğazım şişti ve yutkunamıyorum",1
+"İlaç yazdıracaktım",1
+"Sırtımda döküntüler başladı",1
+"Gözümde kanlanma var",1
+"Diş etlerim kanıyor",1
+"Saç dökülmesi için randevu",1
+"Nefes darlığı çekiyorum",1
+"Öksürük şurubu bitti",1
+"Şiddetli baş dönmesi",1
+"Kulak çınlaması",1
+"Tansiyonum sürekli yüksek çıkıyor",1
+"Şeker hastasıyım, insülin yazdırmak istiyorum",1
+"Sürekli uyku halim var",1
+"Ayak bileğim burkuldu",1
+"Bel ağrısı için fizik tedavi randevusu",1
+"Yüzümde sivilceler arttı",1
+"Bademciklerim iltihaplandı",1
+"Ameliyat sonrası kontrol",1
+"Halsizlik ve iştahsızlık",1
+"Raporumu yenilemek istiyorum",1
+"Midem yanıyor",1
+"Başım dönüyor",1
+"Göğsüm ağrıyor",1
+"Kolum kırıldı galiba",1
+"Burnum akıyor",1
+"Alerjim var",1
+"Böbreklerimde ağrı var",1
+"İdrar yaparken yanma",1
+"Gözlerim çok kaşınıyor",1
+"Kan tahlili sonuçlarımı göstermek istiyorum",1
+"Röntgen çektirmem gerekiyor",1
+"Doktor bey",1
+"Merhaba",1
+"İyi günler",1
+"Teşekkürler",1
+"Evet",1
+"Hayır",1
+"Yok",1
+"Var",1
+"Sağolun",1
+"Lütfen yardım edin",1
+"Acil",1
+"Çok kötüyüm",1
+"Randevumu iptal etmek istiyorum",1
+"Randevumu ertelemek istiyorum",1
+"Baş ağrısı",1
+"Karın ağrısı",1
+"Diş ağrısı",1
+"Kulak ağrısı",1
+"Göz ağrısı",1
+"Bel fıtığı",1
+"Boyun fıtığı",1
+"Kalp krizi",1
+"Felç",1
+"İnme",1
+"Kanser",1
+"Tümör",1
+"Kist",1
+"Miyom",1
+"Polip",1
+"Gastrit",1
+"Ülser",1
+"Reflü",1
+"Hemoroid",1
+"Basur",1
+"Fissür",1
+"Fistül",1
+"Apandisit",1
+"Safra kesesi",1
+"Karaciğer",1
+"Dalak",1
+"Pankreas",1
+"Mide",1
+"Bağırsak",1
+"Böbrek",1
+"Mesane",1
+"Prostat",1
+"Yumurtalık",1
+"Rahim",1
+"Meme",1
+"Tiroid",1
+"Guatr",1
+"Diyabet",1
+"Şeker hastalığı",1
+"Hipertansiyon",1
+"Yüksek tansiyon",1
+"Kolesterol",1
+"Trigliserid",1
+"Obezite",1
+"Şişmanlık",1
+"Zayıflama",1
+"Kilo alma",1
+"Kilo verme",1
+"Diyet",1
+"Beslenme",1
+"Egzersiz",1
+"Spor",1
+"Sigara",1
+"Alkol",1
+"Uyuşturucu",1
+"Bağımlılık",1
+"Stres",1
+"Depresyon",1
+"Anksiyete",1
+"Panik atak",1
+"Uykusuzluk",1
+"Yorgunluk",1
+"Ağrı",1
+"Sızı",1
+"Şişlik",1
+"Kızarıklık",1
+"Morarma",1
+"Kanama",1
+"Akıntı",1
+"Kaşıntı",1
+"Döküntü",1
+"Yara",1
+"Bere",1
+"Yanık",1
+"Kırık",1
+"Çıkık",1
+"Burkulma",1
+"İncime",1
+"Ezilme",1
+"Kesik",1
+"Çizik",1
+"Isırık",1
+"Sokma",1
+"Zehirlenme",1
+"Boğulma",1
+"Boğaza bir şey kaçması",1
+"Yabancı cisim",1
+"asdfghjkl",0
+"qweqweqwe",0
+"123123x",0
+"zxczxczxc",0
+"dfgdfgdfgdfg",0
+"cvbcvbcvb",0
+"tyutyutyu",0
+"bnmbnmbnm",0
+"poipoiopi",0
+"123456asdf",0
+"ghjghjghj",0
+"vbnvbnvbn",0
+"lkjlkjlkj",0
+"mnbmnbmnb",0
+"qazwsxedc",0
+"rfvtgbyhn",0
+"ujmikolp",0
+"trewtrew",0
+"asdasd",0
+"qweqwe",0
+"zxczxc",0
+"dfgdfg",0
+"cvbcvb",0
+"uiouio",0
+"hjkhjk",0
+"vbnvbn",0
+"wqwewq",0
+"kljklj",0
+"nmmnnm",0
+"bvvbvb",0
+"cxzcxz",0
+"fdsfds",0
+"rewrew",0
+"yuiyui",0
+"opopop",0
+"1234567890",0
+"0987654321",0
+"!!!",0
+"???",0
+"...",0
+",,,",0
+"///",0
+"\\\\\\",0
+"---",0
+"___",0
+"+++",0
+"===",0
+"***",0
+"&&&",0
+"^^^",0
+"%%%",0
+"$$$",0
+"###",0
+"@@@",0
+"!!!???",0
+"???!!!",0
+"!!!...",0
+"...!!!",0
+"???...",0
+"...???",0
+"asdf123",0
+"qwer456",0
+"zxcv789",0
+"123asdf",0
+"456qwer",0
+"789zxcv",0
+"a1s2d3f4",0
+"q1w2e3r4",0
+"z1x2c3v4",0
+"1a2s3d4f",0
+"1q2w3e4r",0
+"1z2x3c4v",0
+"asdfghjklşi,.",0
+"qwertyuıopğü",0
+"zxcvbnmöç.",0
+"asdf ghjk lşi",0
+"qwer tyuı opğü",0
+"zxcv bnmö ç.",0
+"a s d f g",0
+"q w e r t",0
+"z x c v b",0
+"1 2 3 4 5",0
+"! ' ^ + %",0
+"& / ( ) =",0
+"? _ * -",0
+"xoxoxoxo",0
+"abacabac",0
+"xyxyxyxy",0
+"jklşi",0
+"iopğü",0
+"nmöç.",0
+"ghjkl",0
+"tyuıo",0
+"bnmöç",0
+"fghjk",0
+"rtyuı",0
+"vbnmö",0
+"dfghj",0
+"ertyu",0
+"cvbnm",0
+"sdfgh",0
+"werty",0
+"xcvbn",0
+"asdfg",0
+"qwert",0
+"zxcvb",0
+"kjhgfdsa",0
+"poiuytrewq",0
+"mnbvcxz",0
+"lkjhgfdsa",0
+"0987654321",0
+"9876543210",0
+"qazwsx",0
+"edcrfv",0
+"tgbzxc",0
+"plmkoij",0
+"uhbvcx",0
+"ygbtfv",0
+"rdcesx",0
+"waqzxc",0
+"sxdcfv",0
+"fvtgby",0
+"hnuikm",0
+"mkoijb",0
+"vgybh",0
+"unji",0
+"mko",0
+"plm",0
+"qaz",0
+"wsx",0
+"edc",0
+"rfv",0
+"tgb",0
+"yhn",0
+"ujm",0
+"ikl",0
+"oip",0
+"asd",0
+"fgh",0
+"jkl",0
+"qwe",0
+"rty",0
+"uio",0
+"zxc",0
+"vbn",0
+"mkl",0
+"poı",0
+"uyt",0
+"rew",0
+"mnb",0
+"vcxz",0
+"lkj",0
+"hgf",0
+"dsa",0

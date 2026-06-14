@@ -15,6 +15,7 @@ namespace Hospital.Application.Extensions
             services.AddScoped<ISpecialtyService, SpecialtyService>();  
             services.AddScoped<IAppointmentService, AppointmentService>();
             services.AddScoped<IDoctorScheduleService, DoctorScheduleService>();
+            services.AddSingleton<ILocalAIFilterService, AIService.LocalAIFilterService>();
             services.AddScoped<IAIService, AIService.AIService>();
             services.AddScoped<IAIFeedbackService, AIFeedbackService>();
         }
